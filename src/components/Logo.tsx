@@ -8,9 +8,9 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
   const sizeClasses = {
     sm: 'h-8 w-auto',
-    md: 'h-14 w-auto',
-    lg: 'h-18 w-auto',
-    xl: 'h-20 w-auto'
+    md: 'h-10 w-auto',
+    lg: 'h-12 w-auto',
+    xl: 'h-16 w-auto'
   };
 
   return (
@@ -18,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
       <img
         src="/logo.png"
         alt="Hakad Digital Lab"
-        className={`${sizeClasses[size]} transition-all duration-300 hover:scale-105 filter drop-shadow-lg`}
+        className={`${sizeClasses[size]} transition-all duration-300 hover:scale-105 filter drop-shadow-sm`}
         onError={(e) => {
           // Fallback if image fails to load
           const target = e.target as HTMLImageElement;

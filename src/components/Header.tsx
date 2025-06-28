@@ -29,11 +29,11 @@ const Header = () => {
         : 'bg-white/90 backdrop-blur-md shadow-sm'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('home')}>
             <div className="relative">
               <Logo 
-                size="lg"
+                size="md"
                 className="transition-all duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-500/10 to-brand-green-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
