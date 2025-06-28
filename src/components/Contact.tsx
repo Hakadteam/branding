@@ -48,21 +48,21 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'hello@hakaddigitallab.com',
+      details: 'hakaddigitallab@gmail.com',
       subtitle: 'We reply within 24 hours',
       color: 'blue'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+1 (555) 123-4567',
-      subtitle: 'Mon-Fri 9AM-6PM EST',
+      details: '+234 816 167 3433',
+      subtitle: 'Mon-Fri 9AM-6PM WAT',
       color: 'green'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: 'New York, NY',
+      details: 'Lekki, Lagos, Nigeria',
       subtitle: 'Available for meetings',
       color: 'purple'
     }

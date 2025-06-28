@@ -64,15 +64,15 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 group hover:text-brand-blue-400 transition-colors duration-200">
                 <Mail className="h-4 w-4 text-brand-blue-400 group-hover:scale-110 transition-transform duration-200" />
-                <span className="text-gray-300">hello@hakaddigitallab.com</span>
+                <span className="text-gray-300">hakaddigitallab@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3 group hover:text-brand-green-400 transition-colors duration-200">
                 <Phone className="h-4 w-4 text-brand-green-400 group-hover:scale-110 transition-transform duration-200" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
+                <span className="text-gray-300">+234 816 167 3433</span>
               </div>
               <div className="flex items-center space-x-3 group hover:text-purple-400 transition-colors duration-200">
                 <MapPin className="h-4 w-4 text-purple-400 group-hover:scale-110 transition-transform duration-200" />
-                <span className="text-gray-300">New York, NY</span>
+                <span className="text-gray-300">Lekki, Lagos, Nigeria</span>
               </div>
             </div>
           </div>
