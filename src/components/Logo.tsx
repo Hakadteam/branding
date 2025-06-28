@@ -2,14 +2,15 @@ import React from 'react';
 
 interface LogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
   const sizeClasses = {
     sm: 'h-8 w-auto',
-    md: 'h-12 w-auto',
-    lg: 'h-16 w-auto'
+    md: 'h-14 w-auto',
+    lg: 'h-18 w-auto',
+    xl: 'h-20 w-auto'
   };
 
   return (
@@ -17,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
       <img
         src="/logo.png"
         alt="Hakad Digital Lab"
-        className={`${sizeClasses[size]} transition-all duration-300 hover:scale-105 filter drop-shadow-sm`}
+        className={`${sizeClasses[size]} transition-all duration-300 hover:scale-105 filter drop-shadow-lg`}
         onError={(e) => {
           // Fallback if image fails to load
           const target = e.target as HTMLImageElement;
