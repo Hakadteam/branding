@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Calendar } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Calendar, Video, ExternalLink } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ const Contact = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const [showMeetingOptions, setShowMeetingOptions] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -44,21 +45,6 @@ const Contact = () => {
     setTimeout(() => setIsSubmitted(false), 3000);
   };
 
-  const handleScheduleCall = () => {
-    // Create a mailto link with pre-filled subject and body
-    const subject = encodeURIComponent('Schedule a Consultation Call - Hakad Digital Lab');
-    const body = encodeURIComponent(`Hi Hakad Digital Lab team,
-
-I'm interested in scheduling a consultation call to discuss my project requirements.
-
-Please let me know your available times for a call.
-
-Best regards`);
-    
-    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-  };
-
   const handleLocationClick = () => {
     // Open Google Maps with the location
     const location = encodeURIComponent('Lekki, Lagos, Nigeria');
@@ -81,6 +67,58 @@ Best regards`);
 
   const handlePhoneClick = () => {
     window.location.href = 'tel:+2348161673433';
+  };
+
+  const handleScheduleCall = () => {
+    setShowMeetingOptions(true);
+  };
+
+  const handleZoomMeeting = () => {
+    // Create a mailto link with Zoom meeting request
+    const subject = encodeURIComponent('Schedule Zoom Consultation - Hakad Digital Lab');
+    const body = encodeURIComponent(`Hi Hakad Digital Lab team,
+
+I would like to schedule a consultation call via Zoom to discuss my project requirements.
+
+Please let me know your available times and I'll send you a Zoom meeting invite, or feel free to send me one.
+
+Project Details:
+- Service Interest: [Please specify]
+- Preferred Date: [Please specify]
+- Preferred Time: [Please specify your timezone]
+- Duration: 30-60 minutes
+
+Looking forward to our discussion!
+
+Best regards`);
+    
+    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+    setShowMeetingOptions(false);
+  };
+
+  const handleGoogleMeet = () => {
+    // Create a mailto link with Google Meet meeting request
+    const subject = encodeURIComponent('Schedule Google Meet Consultation - Hakad Digital Lab');
+    const body = encodeURIComponent(`Hi Hakad Digital Lab team,
+
+I would like to schedule a consultation call via Google Meet to discuss my project requirements.
+
+Please let me know your available times and I'll create a Google Meet link, or feel free to send me one.
+
+Project Details:
+- Service Interest: [Please specify]
+- Preferred Date: [Please specify]
+- Preferred Time: [Please specify your timezone]
+- Duration: 30-60 minutes
+
+Looking forward to our discussion!
+
+Best regards`);
+    
+    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+    setShowMeetingOptions(false);
   };
 
   const contactInfo = [
@@ -299,6 +337,64 @@ Best regards`);
           </div>
         </div>
       </div>
+
+      {/* Meeting Options Modal */}
+      {showMeetingOptions && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/50 backdrop-blur-sm animate-fade-in">
+          <div className="min-h-screen px-4 py-8 flex items-center justify-center">
+            <div className="max-w-md mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden animate-scale-in">
+              <div className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 p-6 text-white">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold">Choose Meeting Platform</h3>
+                  <button
+                    onClick={() => setShowMeetingOptions(false)}
+                    className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4 rotate-45" />
+                  </button>
+                </div>
+                <p className="text-blue-100">Select your preferred video conferencing platform for our consultation call.</p>
+              </div>
+              
+              <div className="p-6 space-y-4">
+                <button
+                  onClick={handleZoomMeeting}
+                  className="w-full flex items-center space-x-4 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-all duration-300 hover:scale-105 group"
+                >
+                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Video className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-semibold text-gray-900">Zoom Meeting</h4>
+                    <p className="text-sm text-gray-600">Professional video conferencing with screen sharing</p>
+                  </div>
+                  <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors ml-auto" />
+                </button>
+                
+                <button
+                  onClick={handleGoogleMeet}
+                  className="w-full flex items-center space-x-4 p-4 bg-green-50 hover:bg-green-100 rounded-xl transition-all duration-300 hover:scale-105 group"
+                >
+                  <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Video className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-semibold text-gray-900">Google Meet</h4>
+                    <p className="text-sm text-gray-600">Seamless integration with Google Calendar</p>
+                  </div>
+                  <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-green-600 transition-colors ml-auto" />
+                </button>
+              </div>
+              
+              <div className="px-6 pb-6">
+                <p className="text-xs text-gray-500 text-center">
+                  We'll send you an email to coordinate the meeting time and platform details.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
