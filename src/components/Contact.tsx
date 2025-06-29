@@ -54,15 +54,20 @@ const Contact = () => {
   };
 
   const handleEmailClick = () => {
-    // Use mailto protocol to open user's default email client
+    // Enhanced mailto functionality that works with all email clients
     const subject = encodeURIComponent('Inquiry - Hakad Digital Lab Services');
     const body = encodeURIComponent(`Hello Hakad Digital Lab team,
 
-I'm interested in learning more about your services. Please get back to me at your earliest convenience.
+I'm interested in learning more about your digital services and would like to discuss my project requirements.
+
+Please get back to me at your earliest convenience to schedule a consultation.
 
 Best regards`);
     
+    // Create mailto link that opens user's default email client
     const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Use window.location.href for better compatibility across all email clients
     window.location.href = mailtoLink;
   };
 
@@ -79,7 +84,7 @@ Best regards`);
       icon: Mail,
       title: 'Email Us',
       details: 'hakaddigitallab@gmail.com',
-      subtitle: 'We reply within 24 hours',
+      subtitle: 'Opens your email client to compose message',
       color: 'blue',
       onClick: handleEmailClick
     },
@@ -95,7 +100,7 @@ Best regards`);
       icon: MapPin,
       title: 'Visit Us',
       details: 'Lekki, Lagos, Nigeria',
-      subtitle: 'Available for meetings',
+      subtitle: 'View location on Google Maps',
       color: 'purple',
       onClick: handleLocationClick
     }
@@ -234,7 +239,7 @@ Best regards`);
               <div className="animate-fade-in">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h3>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  We'd love to hear about your project. Send us a message and we'll respond as soon as possible.
+                  We'd love to hear about your project. Choose your preferred way to reach us and we'll respond as soon as possible.
                 </p>
               </div>
 
@@ -245,16 +250,17 @@ Best regards`);
                   return (
                     <div 
                       key={index} 
-                      className={`flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up`} 
+                      className={`flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up bg-white rounded-xl p-4 shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-200`} 
                       style={{ animationDelay: `${index * 200 + 600}ms` }}
                       onClick={info.onClick}
                     >
                       <div className={`w-12 h-12 bg-gradient-to-r ${colorClass} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-pulse-glow`}>
                         <Icon className="h-6 w-6 text-white group-hover:animate-bounce" />
                       </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-brand-blue-600 transition-colors duration-300">
+                      <div className="flex-1">
+                        <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-brand-blue-600 transition-colors duration-300 flex items-center">
                           {info.title}
+                          <ExternalLink className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </h4>
                         <p className="text-gray-900 font-medium mb-1 group-hover:text-brand-green-600 transition-colors duration-300">
                           {info.details}
