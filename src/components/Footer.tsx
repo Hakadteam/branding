@@ -1,42 +1,191 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Heart } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Heart, ExternalLink } from 'lucide-react';
 import Logo from './Logo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleEmailClick = () => {
+    const subject = encodeURIComponent('Inquiry - Hakad Digital Lab Services');
+    const body = encodeURIComponent(`Hello Hakad Digital Lab team,
+
+I'm interested in learning more about your digital services.
+
+Please get back to me at your earliest convenience.
+
+Best regards`);
+    
+    window.location.href = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const handlePhoneClick = () => {
+    window.location.href = 'tel:+2348161673433';
+  };
+
+  const handleLocationClick = () => {
+    const location = encodeURIComponent('Lekki, Lagos, Nigeria');
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${location}`;
+    window.open(googleMapsUrl, '_blank');
+  };
+
   const footerLinks = {
     services: [
-      'Website Design',
-      'UI/UX Design',
-      'Funnel Development',
-      'Digital Strategy',
-      'Brand Identity',
-      'Maintenance & Support'
+      { name: 'Website Design & Development', action: () => scrollToSection('services') },
+      { name: 'UI/UX Design', action: () => scrollToSection('services') },
+      { name: 'Funnel Development', action: () => scrollToSection('services') },
+      { name: 'Digital Strategy', action: () => scrollToSection('contact') },
+      { name: 'Brand Identity', action: () => scrollToSection('contact') },
+      { name: 'Maintenance & Support', action: () => scrollToSection('contact') }
     ],
     company: [
-      'About Us',
-      'Portfolio',
-      'Case Studies',
-      'Blog',
-      'Careers',
-      'Contact'
+      { name: 'About Us', action: () => scrollToSection('about') },
+      { name: 'Portfolio', action: () => scrollToSection('portfolio') },
+      { name: 'Case Studies', action: () => scrollToSection('portfolio') },
+      { name: 'Our Process', action: () => scrollToSection('about') },
+      { name: 'Team', action: () => scrollToSection('about') },
+      { name: 'Contact', action: () => scrollToSection('contact') }
     ],
     resources: [
-      'Design Process',
-      'FAQ',
-      'Privacy Policy',
-      'Terms of Service',
-      'Cookie Policy',
-      'Support Center'
+      { 
+        name: 'Design Process', 
+        action: () => {
+          // Scroll to services section and show detailed process
+          scrollToSection('services');
+          setTimeout(() => {
+            // This could trigger a modal or expanded view in the future
+            console.log('Show design process details');
+          }, 500);
+        }
+      },
+      { 
+        name: 'Project FAQ', 
+        action: () => {
+          // Create a comprehensive FAQ modal or section
+          const faqContent = `
+FREQUENTLY ASKED QUESTIONS
+
+🎨 DESIGN & DEVELOPMENT
+Q: How long does a typical project take?
+A: Website projects: 4-8 weeks, UI/UX Design: 3-6 weeks, Funnels: 2-4 weeks
+
+Q: Do you provide ongoing support?
+A: Yes! We offer 3 months free support, then affordable maintenance plans.
+
+Q: Can you work with our existing brand?
+A: Absolutely! We can enhance your current brand or create a new identity.
+
+💰 PRICING & PROCESS
+Q: How do you price your services?
+A: We provide custom quotes based on project scope and requirements.
+
+Q: What's included in the project cost?
+A: Design, development, testing, launch, training, and 3 months support.
+
+Q: Do you require payment upfront?
+A: We work with 50% upfront, 50% on completion for most projects.
+
+📞 COMMUNICATION
+Q: How do we communicate during the project?
+A: Regular video calls, email updates, and project management tools.
+
+Q: Can we request changes during development?
+A: Yes! We include reasonable revisions in all our packages.
+
+Contact us for more specific questions about your project!
+          `;
+          
+          alert(faqContent);
+        }
+      },
+      { 
+        name: 'Free Consultation', 
+        action: () => scrollToSection('contact')
+      },
+      { 
+        name: 'Portfolio Examples', 
+        action: () => scrollToSection('portfolio')
+      },
+      { 
+        name: 'Technology Stack', 
+        action: () => {
+          const techInfo = `
+OUR TECHNOLOGY STACK
+
+🎨 DESIGN TOOLS
+• Figma - UI/UX Design & Prototyping
+• Adobe Creative Suite - Graphics & Branding
+• Sketch - Interface Design
+• InVision - Interactive Prototypes
+
+💻 FRONTEND DEVELOPMENT
+• React & Next.js - Modern Web Applications
+• TypeScript - Type-safe Development
+• Tailwind CSS - Responsive Styling
+• HTML5 & CSS3 - Web Standards
+
+⚙️ BACKEND DEVELOPMENT
+• Node.js - Server-side JavaScript
+• Python - Data Processing & APIs
+• MongoDB & PostgreSQL - Databases
+• AWS & Vercel - Cloud Hosting
+
+📊 MARKETING & ANALYTICS
+• Google Analytics - Performance Tracking
+• HubSpot & Mailchimp - CRM & Email
+• ClickFunnels - Sales Funnels
+• Facebook & Google Ads - Advertising
+
+🔒 SECURITY & PERFORMANCE
+• SSL Certificates - Secure Connections
+• CDN - Fast Global Delivery
+• SEO Optimization - Search Rankings
+• Mobile-First Design - All Devices
+
+Want to know more? Contact us for a detailed discussion!
+          `;
+          
+          alert(techInfo);
+        }
+      },
+      { 
+        name: 'Contact Support', 
+        action: () => scrollToSection('contact')
+      }
     ]
   };
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook', color: 'hover:bg-blue-600' },
-    { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:bg-blue-400' },
-    { icon: Instagram, href: '#', label: 'Instagram', color: 'hover:bg-pink-600' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:bg-blue-700' }
+    { 
+      icon: Facebook, 
+      href: 'https://facebook.com/hakaddigitallab', 
+      label: 'Facebook', 
+      color: 'hover:bg-blue-600' 
+    },
+    { 
+      icon: Twitter, 
+      href: 'https://twitter.com/hakaddigitallab', 
+      label: 'Twitter', 
+      color: 'hover:bg-blue-400' 
+    },
+    { 
+      icon: Instagram, 
+      href: 'https://instagram.com/hakaddigitallab', 
+      label: 'Instagram', 
+      color: 'hover:bg-pink-600' 
+    },
+    { 
+      icon: Linkedin, 
+      href: 'https://linkedin.com/company/hakaddigitallab', 
+      label: 'LinkedIn', 
+      color: 'hover:bg-blue-700' 
+    }
   ];
 
   return (
@@ -49,7 +198,7 @@ const Footer = () => {
         <div className="py-16 grid lg:grid-cols-4 md:grid-cols-2 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-6 group">
+            <div className="flex items-center space-x-3 mb-6 group cursor-pointer" onClick={() => scrollToSection('home')}>
               <Logo 
                 className="group-hover:scale-110 transition-transform duration-300 filter brightness-110"
                 size="md"
@@ -62,17 +211,29 @@ const Footer = () => {
             </p>
             
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 group hover:text-brand-blue-400 transition-colors duration-200">
+              <div 
+                className="flex items-center space-x-3 group hover:text-brand-blue-400 transition-colors duration-200 cursor-pointer"
+                onClick={handleEmailClick}
+              >
                 <Mail className="h-4 w-4 text-brand-blue-400 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-gray-300">hakaddigitallab@gmail.com</span>
+                <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </div>
-              <div className="flex items-center space-x-3 group hover:text-brand-green-400 transition-colors duration-200">
+              <div 
+                className="flex items-center space-x-3 group hover:text-brand-green-400 transition-colors duration-200 cursor-pointer"
+                onClick={handlePhoneClick}
+              >
                 <Phone className="h-4 w-4 text-brand-green-400 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-gray-300">+234 816 167 3433</span>
+                <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </div>
-              <div className="flex items-center space-x-3 group hover:text-purple-400 transition-colors duration-200">
+              <div 
+                className="flex items-center space-x-3 group hover:text-purple-400 transition-colors duration-200 cursor-pointer"
+                onClick={handleLocationClick}
+              >
                 <MapPin className="h-4 w-4 text-purple-400 group-hover:scale-110 transition-transform duration-200" />
                 <span className="text-gray-300">Lekki, Lagos, Nigeria</span>
+                <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </div>
             </div>
           </div>
@@ -83,9 +244,15 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
-                    {link}
-                  </a>
+                  <button 
+                    onClick={link.action}
+                    className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block text-left w-full group"
+                  >
+                    <span className="flex items-center justify-between">
+                      {link.name}
+                      <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    </span>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -97,9 +264,15 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
-                    {link}
-                  </a>
+                  <button 
+                    onClick={link.action}
+                    className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block text-left w-full group"
+                  >
+                    <span className="flex items-center justify-between">
+                      {link.name}
+                      <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    </span>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -111,9 +284,15 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.resources.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
-                    {link}
-                  </a>
+                  <button 
+                    onClick={link.action}
+                    className="text-gray-300 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block text-left w-full group"
+                  >
+                    <span className="flex items-center justify-between">
+                      {link.name}
+                      <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    </span>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -128,7 +307,7 @@ const Footer = () => {
                 Stay Updated
               </h3>
               <p className="text-gray-300">
-                Subscribe to our newsletter for the latest design trends and digital insights.
+                Subscribe to our newsletter for the latest design trends, digital insights, and exclusive offers.
               </p>
             </div>
             
@@ -138,7 +317,26 @@ const Footer = () => {
                 placeholder="Enter your email"
                 className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-300"
               />
-              <button className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 px-6 py-3 rounded-xl font-semibold hover:from-brand-blue-700 hover:to-brand-green-600 transition-all duration-300 hover:scale-105 shadow-lg">
+              <button 
+                onClick={() => {
+                  const email = (document.querySelector('input[type="email"]') as HTMLInputElement)?.value;
+                  if (email) {
+                    const subject = encodeURIComponent('Newsletter Subscription - Hakad Digital Lab');
+                    const body = encodeURIComponent(`Hello Hakad Digital Lab team,
+
+I would like to subscribe to your newsletter with the email: ${email}
+
+Please add me to your mailing list for updates on design trends, digital insights, and exclusive offers.
+
+Thank you!`);
+                    
+                    window.location.href = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
+                  } else {
+                    alert('Please enter your email address');
+                  }
+                }}
+                className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 px-6 py-3 rounded-xl font-semibold hover:from-brand-blue-700 hover:to-brand-green-600 transition-all duration-300 hover:scale-105 shadow-lg"
+              >
                 Subscribe
               </button>
             </div>
@@ -161,6 +359,8 @@ const Footer = () => {
                   <a
                     key={index}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={social.label}
                     className={`w-10 h-10 bg-gray-800/50 rounded-lg flex items-center justify-center ${social.color} transition-all duration-300 group backdrop-blur-sm hover:scale-110 hover:shadow-lg`}
                   >
