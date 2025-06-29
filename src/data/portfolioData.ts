@@ -61,11 +61,11 @@ export const portfolioProjects: PortfolioProject[] = [
       'Create a scalable design system'
     ],
     description: 'Complete UX/UI redesign of a financial technology dashboard focusing on data visualization, user flows, and accessibility.',
-    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=1200',
     gallery: [
-      'https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     technologies: [
       { name: 'Figma', category: 'design' },
@@ -84,7 +84,7 @@ export const portfolioProjects: PortfolioProject[] = [
       role: 'Product Manager',
       company: 'TechFlow Solutions',
       content: 'The redesign exceeded our expectations. User engagement increased by 45% and our support tickets decreased significantly. The team\'s attention to detail and user-centered approach was exceptional.',
-      avatar: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=150'
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     stages: [
       {
@@ -144,11 +144,11 @@ export const portfolioProjects: PortfolioProject[] = [
       'Implement automated nurture sequences'
     ],
     description: 'Multi-stage conversion funnel with landing pages, email sequences, and automated workflows designed to convert visitors into paying customers.',
-    image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200',
     gallery: [
-      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     technologies: [
       { name: 'ClickFunnels', category: 'marketing' },
@@ -168,7 +168,7 @@ export const portfolioProjects: PortfolioProject[] = [
       role: 'Marketing Director',
       company: 'CloudSync Pro',
       content: 'Our lead generation improved dramatically. The funnel not only increased our conversion rates but also improved lead quality. ROI increased by 180% within the first quarter.',
-      avatar: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=150'
+      avatar: 'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     stages: [
       {
@@ -228,11 +228,11 @@ export const portfolioProjects: PortfolioProject[] = [
       'Optimize for mobile commerce'
     ],
     description: 'Full-stack e-commerce platform with custom CMS, vendor dashboard, advanced product filtering, and seamless checkout experience.',
-    image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1200',
     gallery: [
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     technologies: [
       { name: 'React', category: 'frontend' },
@@ -253,7 +253,7 @@ export const portfolioProjects: PortfolioProject[] = [
       role: 'Founder & CEO',
       company: 'Artisan Marketplace',
       content: 'The platform exceeded all our expectations. Sales increased by 300% in the first month, and our vendors love the intuitive dashboard. The technical execution was flawless.',
-      avatar: 'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=150'
+      avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     stages: [
       {
@@ -313,11 +313,11 @@ export const portfolioProjects: PortfolioProject[] = [
       'Create accessible interface for all age groups'
     ],
     description: 'Comprehensive mobile app design focusing on accessibility, user experience, and healthcare compliance requirements.',
-    image: 'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg?auto=compress&cs=tinysrgb&w=1200',
     gallery: [
-      'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     technologies: [
       { name: 'Figma', category: 'design' },
@@ -336,7 +336,7 @@ export const portfolioProjects: PortfolioProject[] = [
       role: 'Chief Medical Officer',
       company: 'MedConnect',
       content: 'The app design is intuitive and accessible for patients of all ages. We\'ve seen a significant increase in patient engagement and satisfaction scores since launch.',
-      avatar: 'https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg?auto=compress&cs=tinysrgb&w=150'
+      avatar: 'https://images.pexels.com/photos/612608/pexels-photo-612608.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     stages: [
       {
@@ -396,11 +396,11 @@ export const portfolioProjects: PortfolioProject[] = [
       'Improve lead-to-sale conversion rate'
     ],
     description: 'Sophisticated lead generation funnel with property showcase pages, lead magnets, and automated CRM integration.',
-    image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200',
     gallery: [
-      'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     technologies: [
       { name: 'Leadpages', category: 'marketing' },
@@ -419,7 +419,7 @@ export const portfolioProjects: PortfolioProject[] = [
       role: 'Sales Director',
       company: 'Premier Properties',
       content: 'The funnel transformed our lead generation. We\'re now getting higher quality leads at a fraction of the cost, and our sales team is closing more deals than ever.',
-      avatar: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=150'
+      avatar: 'https://images.pexels.com/photos/834863/pexels-photo-834863.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     stages: [
       {
@@ -479,11 +479,11 @@ export const portfolioProjects: PortfolioProject[] = [
       'Enhance mobile user experience'
     ],
     description: 'Modern corporate website with custom CMS, advanced SEO optimization, and integrated lead generation features.',
-    image: 'https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=1200',
     gallery: [
-      'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     technologies: [
       { name: 'WordPress', category: 'cms' },
@@ -503,7 +503,7 @@ export const portfolioProjects: PortfolioProject[] = [
       role: 'Marketing Manager',
       company: 'InnovateTech Solutions',
       content: 'Our new website has transformed our online presence. We\'re ranking higher in search results and generating significantly more qualified leads. The design perfectly represents our brand.',
-      avatar: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=150'
+      avatar: 'https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=150'
     },
     stages: [
       {
