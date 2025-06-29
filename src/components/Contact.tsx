@@ -59,27 +59,45 @@ Best regards`);
     window.location.href = mailtoLink;
   };
 
+  const handleLocationClick = () => {
+    // Open Google Maps with the location
+    const location = encodeURIComponent('Lekki, Lagos, Nigeria');
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${location}`;
+    window.open(googleMapsUrl, '_blank');
+  };
+
+  const handleEmailClick = () => {
+    window.location.href = 'mailto:hakaddigitallab@gmail.com';
+  };
+
+  const handlePhoneClick = () => {
+    window.location.href = 'tel:+2348161673433';
+  };
+
   const contactInfo = [
     {
       icon: Mail,
       title: 'Email Us',
       details: 'hakaddigitallab@gmail.com',
       subtitle: 'We reply within 24 hours',
-      color: 'blue'
+      color: 'blue',
+      onClick: handleEmailClick
     },
     {
       icon: Phone,
       title: 'Call Us',
       details: '+234 816 167 3433',
       subtitle: 'Mon-Fri 9AM-6PM WAT',
-      color: 'green'
+      color: 'green',
+      onClick: handlePhoneClick
     },
     {
       icon: MapPin,
       title: 'Visit Us',
       details: 'Lekki, Lagos, Nigeria',
       subtitle: 'Available for meetings',
-      color: 'purple'
+      color: 'purple',
+      onClick: handleLocationClick
     }
   ];
 
@@ -224,7 +242,12 @@ Best regards`);
                 const Icon = info.icon;
                 const colorClass = getColorClasses(info.color);
                 return (
-                  <div key={index} className={`flex items-start space-x-4 group hover:scale-105 transition-all duration-300 animate-slide-up`} style={{ animationDelay: `${index * 200 + 600}ms` }}>
+                  <div 
+                    key={index} 
+                    className={`flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up`} 
+                    style={{ animationDelay: `${index * 200 + 600}ms` }}
+                    onClick={info.onClick}
+                  >
                     <div className={`w-12 h-12 bg-gradient-to-r ${colorClass} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-pulse-glow`}>
                       <Icon className="h-6 w-6 text-white group-hover:animate-bounce" />
                     </div>
