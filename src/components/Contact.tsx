@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Calendar, Video, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Calendar, Video, ExternalLink, AlertCircle } from 'lucide-react';
+import { contactService } from '../lib/supabase';
 import MeetingScheduler from './MeetingScheduler';
 
 const Contact = () => {
@@ -9,7 +10,9 @@ const Contact = () => {
     service: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isInView, setIsInView] = useState(false);
   const [showMeetingScheduler, setShowMeetingScheduler] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -38,23 +41,58 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (submitError) {
+      setSubmitError(null);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Validate form data
+      if (!formData.name.trim() || !formData.email.trim() || !formData.service || !formData.message.trim()) {
+        throw new Error('Please fill in all required fields');
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        throw new Error('Please enter a valid email address');
+      }
+
+      // Submit to Supabase
+      await contactService.create({
+        name: formData.name.trim(),
+        email: formData.email.trim().toLowerCase(),
+        service: formData.service,
+        message: formData.message.trim()
+      });
+
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', service: '', message: '' });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+      
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleLocationClick = () => {
-    // Open Google Maps with the location
     const location = encodeURIComponent('Lekki, Lagos, Nigeria');
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${location}`;
     window.open(googleMapsUrl, '_blank');
   };
 
   const handleEmailClick = () => {
-    // Enhanced mailto functionality that works with all email clients
     const subject = encodeURIComponent('Inquiry - Hakad Digital Lab Services');
     const body = encodeURIComponent(`Hello Hakad Digital Lab team,
 
@@ -64,10 +102,7 @@ Please get back to me at your earliest convenience to schedule a consultation.
 
 Best regards`);
     
-    // Create mailto link that opens user's default email client
     const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Use window.location.href for better compatibility across all email clients
     window.location.href = mailtoLink;
   };
 
@@ -143,11 +178,33 @@ Best regards`);
             <div className={`bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
               <h3 className="text-2xl font-bold text-gray-900 mb-6 animate-fade-in">Send us a message</h3>
               
+              {/* Success Message */}
+              {isSubmitted && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center space-x-3 animate-scale-in">
+                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <div>
+                    <p className="text-green-800 font-medium">Message sent successfully!</p>
+                    <p className="text-green-600 text-sm">We'll get back to you within 24 hours.</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Error Message */}
+              {submitError && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center space-x-3 animate-scale-in">
+                  <AlertCircle className="h-5 w-5 text-red-600" />
+                  <div>
+                    <p className="text-red-800 font-medium">Error sending message</p>
+                    <p className="text-red-600 text-sm">{submitError}</p>
+                  </div>
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="animate-slide-up stagger-1">
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name
+                      Full Name *
                     </label>
                     <input
                       type="text"
@@ -156,14 +213,15 @@ Best regards`);
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       placeholder="John Doe"
                     />
                   </div>
                   
                   <div className="animate-slide-up stagger-2">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address
+                      Email Address *
                     </label>
                     <input
                       type="email"
@@ -172,7 +230,8 @@ Best regards`);
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -180,7 +239,7 @@ Best regards`);
                 
                 <div className="animate-slide-up stagger-3">
                   <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Interested In
+                    Service Interested In *
                   </label>
                   <select
                     id="service"
@@ -188,19 +247,21 @@ Best regards`);
                     value={formData.service}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <option value="">Select a service</option>
                     <option value="website-design">Website Design & Development</option>
                     <option value="ui-ux">UI/UX Design</option>
                     <option value="funnel">Funnel Development</option>
                     <option value="consultation">Consultation</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
                 
                 <div className="animate-slide-up stagger-4">
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Details
+                    Project Details *
                   </label>
                   <textarea
                     id="message"
@@ -208,20 +269,26 @@ Best regards`);
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isSubmitting}
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 resize-none hover:border-brand-blue-300"
-                    placeholder="Tell us about your project requirements..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 resize-none hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder="Tell us about your project requirements, timeline, and budget..."
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
-                  disabled={isSubmitted}
+                  disabled={isSubmitting || isSubmitted}
                   className="w-full bg-gradient-to-r from-brand-blue-600 to-brand-green-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:from-brand-blue-700 hover:to-brand-green-600 hover:scale-105 shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed animate-pulse-glow hover:animate-bounce"
                 >
-                  {isSubmitted ? (
+                  {isSubmitting ? (
                     <>
-                      <CheckCircle className="h-5 w-5 animate-spin" />
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sending...</span>
+                    </>
+                  ) : isSubmitted ? (
+                    <>
+                      <CheckCircle className="h-5 w-5" />
                       <span>Message Sent!</span>
                     </>
                   ) : (
