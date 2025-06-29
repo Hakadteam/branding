@@ -67,7 +67,16 @@ Best regards`);
   };
 
   const handleEmailClick = () => {
-    window.location.href = 'mailto:hakaddigitallab@gmail.com';
+    // Use mailto protocol to open user's default email client
+    const subject = encodeURIComponent('Inquiry - Hakad Digital Lab Services');
+    const body = encodeURIComponent(`Hello Hakad Digital Lab team,
+
+I'm interested in learning more about your services. Please get back to me at your earliest convenience.
+
+Best regards`);
+    
+    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
   };
 
   const handlePhoneClick = () => {
