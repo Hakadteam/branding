@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Calendar } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -42,6 +42,21 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitted(true);
     setTimeout(() => setIsSubmitted(false), 3000);
+  };
+
+  const handleScheduleCall = () => {
+    // Create a mailto link with pre-filled subject and body
+    const subject = encodeURIComponent('Schedule a Consultation Call - Hakad Digital Lab');
+    const body = encodeURIComponent(`Hi Hakad Digital Lab team,
+
+I'm interested in scheduling a consultation call to discuss my project requirements.
+
+Please let me know your available times for a call.
+
+Best regards`);
+    
+    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
   };
 
   const contactInfo = [
@@ -240,8 +255,12 @@ const Contact = () => {
                 <p className="mb-4 opacity-90 animate-slide-in-right">
                   Book a free consultation call to discuss your project requirements.
                 </p>
-                <button className="bg-white text-brand-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 animate-bounce-slow hover:animate-pulse">
-                  Schedule a Call
+                <button 
+                  onClick={handleScheduleCall}
+                  className="bg-white text-brand-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 animate-bounce-slow hover:animate-pulse flex items-center space-x-2"
+                >
+                  <Calendar className="h-5 w-5" />
+                  <span>Schedule a Call</span>
                 </button>
               </div>
             </div>
