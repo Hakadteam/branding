@@ -31,6 +31,13 @@ const Services = () => {
     return () => observer.disconnect();
   }, []);
 
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const services = [
     {
       icon: Monitor,
@@ -144,7 +151,10 @@ const Services = () => {
                     ))}
                   </ul>
                   
-                  <button className={`group/btn flex items-center space-x-2 ${colorClasses.text} font-semibold hover:underline relative z-10 transition-all duration-300 hover:scale-105 hover:animate-pulse`}>
+                  <button 
+                    onClick={scrollToContact}
+                    className={`group/btn flex items-center space-x-2 ${colorClasses.text} font-semibold hover:underline relative z-10 transition-all duration-300 hover:scale-105 hover:animate-pulse`}
+                  >
                     <span>Learn More</span>
                     <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-2 group-hover/btn:animate-bounce transition-all duration-300" />
                   </button>
@@ -169,7 +179,10 @@ const Services = () => {
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto animate-slide-in-right">
                 Let's discuss your project and create something amazing together. Our team is ready to bring your vision to life.
               </p>
-              <button className="bg-white text-brand-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg animate-bounce-slow hover:animate-pulse">
+              <button 
+                onClick={scrollToContact}
+                className="bg-white text-brand-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg animate-bounce-slow hover:animate-pulse"
+              >
                 Get Started Today
               </button>
             </div>
