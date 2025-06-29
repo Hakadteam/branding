@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Heart, ExternalLink } from 'lucide-react';
+import { newsletterService } from '../lib/supabase';
 import Logo from './Logo';
 
 const Footer = () => {
@@ -35,6 +36,35 @@ Best regards`);
     window.open(googleMapsUrl, '_blank');
   };
 
+  const handleNewsletterSubscribe = async () => {
+    const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
+    const email = emailInput?.value?.trim();
+    
+    if (!email) {
+      alert('Please enter your email address');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    try {
+      await newsletterService.subscribe(email);
+      alert('Successfully subscribed to our newsletter! Thank you for joining us.');
+      emailInput.value = '';
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert('Failed to subscribe. Please try again later.');
+      }
+    }
+  };
+
   const footerLinks = {
     services: [
       { name: 'Website Design & Development', action: () => scrollToSection('services') },
@@ -56,10 +86,8 @@ Best regards`);
       { 
         name: 'Design Process', 
         action: () => {
-          // Scroll to services section and show detailed process
           scrollToSection('services');
           setTimeout(() => {
-            // This could trigger a modal or expanded view in the future
             console.log('Show design process details');
           }, 500);
         }
@@ -67,7 +95,6 @@ Best regards`);
       { 
         name: 'Project FAQ', 
         action: () => {
-          // Create a comprehensive FAQ modal or section
           const faqContent = `
 FREQUENTLY ASKED QUESTIONS
 
@@ -318,23 +345,7 @@ Want to know more? Contact us for a detailed discussion!
                 className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-300"
               />
               <button 
-                onClick={() => {
-                  const email = (document.querySelector('input[type="email"]') as HTMLInputElement)?.value;
-                  if (email) {
-                    const subject = encodeURIComponent('Newsletter Subscription - Hakad Digital Lab');
-                    const body = encodeURIComponent(`Hello Hakad Digital Lab team,
-
-I would like to subscribe to your newsletter with the email: ${email}
-
-Please add me to your mailing list for updates on design trends, digital insights, and exclusive offers.
-
-Thank you!`);
-                    
-                    window.location.href = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
-                  } else {
-                    alert('Please enter your email address');
-                  }
-                }}
+                onClick={handleNewsletterSubscribe}
                 className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 px-6 py-3 rounded-xl font-semibold hover:from-brand-blue-700 hover:to-brand-green-600 transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 Subscribe
