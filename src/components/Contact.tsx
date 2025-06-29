@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Calendar, Video, ExternalLink } from 'lucide-react';
+import MeetingScheduler from './MeetingScheduler';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const Contact = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const [showMeetingOptions, setShowMeetingOptions] = useState(false);
+  const [showMeetingScheduler, setShowMeetingScheduler] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -70,55 +71,7 @@ Best regards`);
   };
 
   const handleScheduleCall = () => {
-    setShowMeetingOptions(true);
-  };
-
-  const handleZoomMeeting = () => {
-    // Create a mailto link with Zoom meeting request
-    const subject = encodeURIComponent('Schedule Zoom Consultation - Hakad Digital Lab');
-    const body = encodeURIComponent(`Hi Hakad Digital Lab team,
-
-I would like to schedule a consultation call via Zoom to discuss my project requirements.
-
-Please let me know your available times and I'll send you a Zoom meeting invite, or feel free to send me one.
-
-Project Details:
-- Service Interest: [Please specify]
-- Preferred Date: [Please specify]
-- Preferred Time: [Please specify your timezone]
-- Duration: 30-60 minutes
-
-Looking forward to our discussion!
-
-Best regards`);
-    
-    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-    setShowMeetingOptions(false);
-  };
-
-  const handleGoogleMeet = () => {
-    // Create a mailto link with Google Meet meeting request
-    const subject = encodeURIComponent('Schedule Google Meet Consultation - Hakad Digital Lab');
-    const body = encodeURIComponent(`Hi Hakad Digital Lab team,
-
-I would like to schedule a consultation call via Google Meet to discuss my project requirements.
-
-Please let me know your available times and I'll create a Google Meet link, or feel free to send me one.
-
-Project Details:
-- Service Interest: [Please specify]
-- Preferred Date: [Please specify]
-- Preferred Time: [Please specify your timezone]
-- Duration: 30-60 minutes
-
-Looking forward to our discussion!
-
-Best regards`);
-    
-    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-    setShowMeetingOptions(false);
+    setShowMeetingScheduler(true);
   };
 
   const contactInfo = [
@@ -158,244 +111,194 @@ Best regards`);
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-20 bg-white relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-48 h-48 bg-gradient-to-r from-orange-100/30 to-red-100/30 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-20 w-64 h-64 bg-gradient-to-r from-brand-blue-100/30 to-brand-green-100/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
-          <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4 animate-bounce-slow">
-            <Sparkles className="h-4 w-4 animate-spin" />
-            <span>Get In Touch</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-slide-in-left">
-            Ready to Start Your Project?
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in-right">
-            Let's discuss how we can help transform your digital presence and drive your business forward.
-          </p>
+    <>
+      <section ref={sectionRef} id="contact" className="py-20 bg-white relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-20 w-48 h-48 bg-gradient-to-r from-orange-100/30 to-red-100/30 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-20 w-64 h-64 bg-gradient-to-r from-brand-blue-100/30 to-brand-green-100/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Form */}
-          <div className={`bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 animate-fade-in">Send us a message</h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="animate-slide-up stagger-1">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
-                    placeholder="John Doe"
-                  />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className={`text-center mb-16 transition-all duration-1000 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
+            <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4 animate-bounce-slow">
+              <Sparkles className="h-4 w-4 animate-spin" />
+              <span>Get In Touch</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-slide-in-left">
+              Ready to Start Your Project?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in-right">
+              Let's discuss how we can help transform your digital presence and drive your business forward.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Contact Form */}
+            <div className={`bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 animate-fade-in">Send us a message</h3>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="animate-slide-up stagger-1">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  
+                  <div className="animate-slide-up stagger-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
+                      placeholder="john@example.com"
+                    />
+                  </div>
                 </div>
                 
-                <div className="animate-slide-up stagger-2">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
+                <div className="animate-slide-up stagger-3">
+                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                    Service Interested In
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
+                  <select
+                    id="service"
+                    name="service"
+                    value={formData.service}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
-                    placeholder="john@example.com"
-                  />
+                  >
+                    <option value="">Select a service</option>
+                    <option value="website-design">Website Design & Development</option>
+                    <option value="ui-ux">UI/UX Design</option>
+                    <option value="funnel">Funnel Development</option>
+                    <option value="consultation">Consultation</option>
+                  </select>
                 </div>
-              </div>
-              
-              <div className="animate-slide-up stagger-3">
-                <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                  Service Interested In
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300"
+                
+                <div className="animate-slide-up stagger-4">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Project Details
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 resize-none hover:border-brand-blue-300"
+                    placeholder="Tell us about your project requirements..."
+                  ></textarea>
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={isSubmitted}
+                  className="w-full bg-gradient-to-r from-brand-blue-600 to-brand-green-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:from-brand-blue-700 hover:to-brand-green-600 hover:scale-105 shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed animate-pulse-glow hover:animate-bounce"
                 >
-                  <option value="">Select a service</option>
-                  <option value="website-design">Website Design & Development</option>
-                  <option value="ui-ux">UI/UX Design</option>
-                  <option value="funnel">Funnel Development</option>
-                  <option value="consultation">Consultation</option>
-                </select>
-              </div>
-              
-              <div className="animate-slide-up stagger-4">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Project Details
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 resize-none hover:border-brand-blue-300"
-                  placeholder="Tell us about your project requirements..."
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                disabled={isSubmitted}
-                className="w-full bg-gradient-to-r from-brand-blue-600 to-brand-green-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:from-brand-blue-700 hover:to-brand-green-600 hover:scale-105 shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed animate-pulse-glow hover:animate-bounce"
-              >
-                {isSubmitted ? (
-                  <>
-                    <CheckCircle className="h-5 w-5 animate-spin" />
-                    <span>Message Sent!</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-5 w-5 group-hover:animate-bounce" />
-                    <span>Send Message</span>
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
-
-          {/* Contact Information */}
-          <div className={`space-y-8 transition-all duration-1000 delay-500 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
-            <div className="animate-fade-in">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h3>
-              <p className="text-gray-600 leading-relaxed mb-8">
-                We'd love to hear about your project. Send us a message and we'll respond as soon as possible.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                const colorClass = getColorClasses(info.color);
-                return (
-                  <div 
-                    key={index} 
-                    className={`flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up`} 
-                    style={{ animationDelay: `${index * 200 + 600}ms` }}
-                    onClick={info.onClick}
-                  >
-                    <div className={`w-12 h-12 bg-gradient-to-r ${colorClass} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-pulse-glow`}>
-                      <Icon className="h-6 w-6 text-white group-hover:animate-bounce" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-brand-blue-600 transition-colors duration-300">
-                        {info.title}
-                      </h4>
-                      <p className="text-gray-900 font-medium mb-1 group-hover:text-brand-green-600 transition-colors duration-300">
-                        {info.details}
-                      </p>
-                      <p className="text-gray-600 text-sm">
-                        {info.subtitle}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Enhanced CTA Section */}
-            <div className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 rounded-2xl p-8 text-white relative overflow-hidden animate-gradient-x">
-              {/* Animated background elements */}
-              <div className="absolute top-4 right-4 w-6 h-6 border-2 border-white/20 rounded-full animate-spin"></div>
-              <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/10 rounded-full animate-pulse"></div>
-              
-              <div className="relative z-10">
-                <h4 className="text-xl font-bold mb-3 animate-slide-in-left">Ready to get started?</h4>
-                <p className="mb-4 opacity-90 animate-slide-in-right">
-                  Book a free consultation call to discuss your project requirements.
-                </p>
-                <button 
-                  onClick={handleScheduleCall}
-                  className="bg-white text-brand-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 animate-bounce-slow hover:animate-pulse flex items-center space-x-2"
-                >
-                  <Calendar className="h-5 w-5" />
-                  <span>Schedule a Call</span>
+                  {isSubmitted ? (
+                    <>
+                      <CheckCircle className="h-5 w-5 animate-spin" />
+                      <span>Message Sent!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-5 w-5 group-hover:animate-bounce" />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </button>
-              </div>
+              </form>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Meeting Options Modal */}
-      {showMeetingOptions && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/50 backdrop-blur-sm animate-fade-in">
-          <div className="min-h-screen px-4 py-8 flex items-center justify-center">
-            <div className="max-w-md mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden animate-scale-in">
-              <div className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 p-6 text-white">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold">Choose Meeting Platform</h3>
-                  <button
-                    onClick={() => setShowMeetingOptions(false)}
-                    className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+            {/* Contact Information */}
+            <div className={`space-y-8 transition-all duration-1000 delay-500 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
+              <div className="animate-fade-in">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h3>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  We'd love to hear about your project. Send us a message and we'll respond as soon as possible.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => {
+                  const Icon = info.icon;
+                  const colorClass = getColorClasses(info.color);
+                  return (
+                    <div 
+                      key={index} 
+                      className={`flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up`} 
+                      style={{ animationDelay: `${index * 200 + 600}ms` }}
+                      onClick={info.onClick}
+                    >
+                      <div className={`w-12 h-12 bg-gradient-to-r ${colorClass} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-pulse-glow`}>
+                        <Icon className="h-6 w-6 text-white group-hover:animate-bounce" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-brand-blue-600 transition-colors duration-300">
+                          {info.title}
+                        </h4>
+                        <p className="text-gray-900 font-medium mb-1 group-hover:text-brand-green-600 transition-colors duration-300">
+                          {info.details}
+                        </p>
+                        <p className="text-gray-600 text-sm">
+                          {info.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Enhanced CTA Section */}
+              <div className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 rounded-2xl p-8 text-white relative overflow-hidden animate-gradient-x">
+                {/* Animated background elements */}
+                <div className="absolute top-4 right-4 w-6 h-6 border-2 border-white/20 rounded-full animate-spin"></div>
+                <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/10 rounded-full animate-pulse"></div>
+                
+                <div className="relative z-10">
+                  <h4 className="text-xl font-bold mb-3 animate-slide-in-left">Ready to get started?</h4>
+                  <p className="mb-4 opacity-90 animate-slide-in-right">
+                    Schedule a consultation call to discuss your project requirements in detail.
+                  </p>
+                  <button 
+                    onClick={handleScheduleCall}
+                    className="bg-white text-brand-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 animate-bounce-slow hover:animate-pulse flex items-center space-x-2"
                   >
-                    <ExternalLink className="h-4 w-4 rotate-45" />
+                    <Calendar className="h-5 w-5" />
+                    <span>Schedule a Call</span>
                   </button>
                 </div>
-                <p className="text-blue-100">Select your preferred video conferencing platform for our consultation call.</p>
-              </div>
-              
-              <div className="p-6 space-y-4">
-                <button
-                  onClick={handleZoomMeeting}
-                  className="w-full flex items-center space-x-4 p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-all duration-300 hover:scale-105 group"
-                >
-                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Video className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-semibold text-gray-900">Zoom Meeting</h4>
-                    <p className="text-sm text-gray-600">Professional video conferencing with screen sharing</p>
-                  </div>
-                  <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors ml-auto" />
-                </button>
-                
-                <button
-                  onClick={handleGoogleMeet}
-                  className="w-full flex items-center space-x-4 p-4 bg-green-50 hover:bg-green-100 rounded-xl transition-all duration-300 hover:scale-105 group"
-                >
-                  <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Video className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-semibold text-gray-900">Google Meet</h4>
-                    <p className="text-sm text-gray-600">Seamless integration with Google Calendar</p>
-                  </div>
-                  <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-green-600 transition-colors ml-auto" />
-                </button>
-              </div>
-              
-              <div className="px-6 pb-6">
-                <p className="text-xs text-gray-500 text-center">
-                  We'll send you an email to coordinate the meeting time and platform details.
-                </p>
               </div>
             </div>
           </div>
         </div>
-      )}
-    </section>
+      </section>
+
+      {/* Meeting Scheduler Modal */}
+      <MeetingScheduler 
+        isOpen={showMeetingScheduler}
+        onClose={() => setShowMeetingScheduler(false)}
+      />
+    </>
   );
 };
 
