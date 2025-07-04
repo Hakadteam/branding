@@ -5,6 +5,7 @@ import Services from './components/Services';
 import About from './components/About';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
+import AnimatedCharacter from './components/AnimatedCharacter';
 import Footer from './components/Footer';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <About />
       <Portfolio />
       <Contact />
+      <AnimatedCharacter />
       <Footer />
     </div>
   );
