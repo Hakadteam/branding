@@ -3,9 +3,9 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import About from './components/About';
-import Portfolio from './components/Portfolio';
+import Projects from './components/Projects';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
-import AnimatedCharacter from './components/AnimatedCharacter';
 import Footer from './components/Footer';
 
 function App() {
@@ -15,9 +15,9 @@ function App() {
       <Hero />
       <Services />
       <About />
-      <Portfolio />
+      <Projects />
+      <Testimonials />
       <Contact />
-      <AnimatedCharacter />
       <Footer />
     </div>
   );

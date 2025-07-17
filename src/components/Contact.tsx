@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Calendar, Video, ExternalLink, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Star, MessageCircle, Calendar, ExternalLink, AlertCircle } from 'lucide-react';
 import { contactService } from '../lib/supabase';
-import MeetingScheduler from './MeetingScheduler';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +13,6 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isInView, setIsInView] = useState(false);
-  const [showMeetingScheduler, setShowMeetingScheduler] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -41,7 +39,6 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
-    // Clear error when user starts typing
     if (submitError) {
       setSubmitError(null);
     }
@@ -53,18 +50,15 @@ const Contact = () => {
     setSubmitError(null);
 
     try {
-      // Validate form data
       if (!formData.name.trim() || !formData.email.trim() || !formData.service || !formData.message.trim()) {
         throw new Error('Please fill in all required fields');
       }
 
-      // Email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email)) {
         throw new Error('Please enter a valid email address');
       }
 
-      // Submit to Supabase
       await contactService.create({
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
@@ -75,7 +69,6 @@ const Contact = () => {
       setIsSubmitted(true);
       setFormData({ name: '', email: '', service: '', message: '' });
       
-      // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
       
     } catch (error) {
@@ -86,15 +79,9 @@ const Contact = () => {
     }
   };
 
-  const handleLocationClick = () => {
-    const location = encodeURIComponent('Lekki, Lagos, Nigeria');
-    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${location}`;
-    window.open(googleMapsUrl, '_blank');
-  };
-
   const handleEmailClick = () => {
-    const subject = encodeURIComponent('Inquiry - Hakad Digital Lab Services');
-    const body = encodeURIComponent(`Hello Hakad Digital Lab team,
+    const subject = encodeURIComponent('Inquiry - HAKAD Digital Lab Services');
+    const body = encodeURIComponent(`Hello HAKAD Digital Lab team,
 
 I'm interested in learning more about your digital services and would like to discuss my project requirements.
 
@@ -102,16 +89,17 @@ Please get back to me at your earliest convenience to schedule a consultation.
 
 Best regards`);
     
-    const mailtoLink = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
+    window.location.href = `mailto:hakaddigitallab@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handlePhoneClick = () => {
     window.location.href = 'tel:+2348161673433';
   };
 
-  const handleScheduleCall = () => {
-    setShowMeetingScheduler(true);
+  const handleLocationClick = () => {
+    const location = encodeURIComponent('Lagos, Nigeria');
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${location}`;
+    window.open(googleMapsUrl, '_blank');
   };
 
   const contactInfo = [
@@ -119,7 +107,7 @@ Best regards`);
       icon: Mail,
       title: 'Email Us',
       details: 'hakaddigitallab@gmail.com',
-      subtitle: 'Opens your email client to compose message',
+      subtitle: 'Get a response within 24 hours',
       color: 'blue',
       onClick: handleEmailClick
     },
@@ -134,53 +122,44 @@ Best regards`);
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: 'Lekki, Lagos, Nigeria',
-      subtitle: 'View location on Google Maps',
+      details: 'Lagos, Nigeria',
+      subtitle: 'Available for in-person meetings',
       color: 'purple',
       onClick: handleLocationClick
     }
   ];
 
-  const getColorClasses = (color: string) => {
-    const colors = {
-      blue: 'from-brand-blue-600 to-brand-blue-700',
-      green: 'from-brand-green-600 to-brand-green-700',
-      purple: 'from-purple-600 to-purple-700'
-    };
-    return colors[color as keyof typeof colors];
-  };
+  const socialLinks = [
+    { name: 'LinkedIn', url: 'https://linkedin.com/company/hakaddigitallab', color: 'bg-blue-600' },
+    { name: 'Twitter', url: 'https://twitter.com/hakaddigitallab', color: 'bg-blue-400' },
+    { name: 'Instagram', url: 'https://instagram.com/hakaddigitallab', color: 'bg-pink-600' },
+    { name: 'Facebook', url: 'https://facebook.com/hakaddigitallab', color: 'bg-blue-700' }
+  ];
 
   return (
-    <>
-      <section ref={sectionRef} id="contact" className="py-20 bg-white relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-20 w-48 h-48 bg-gradient-to-r from-orange-100/30 to-red-100/30 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-20 w-64 h-64 bg-gradient-to-r from-brand-blue-100/30 to-brand-green-100/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+    <section ref={sectionRef} id="contact" className="py-20 bg-gray-50 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
+          <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <MessageCircle className="h-4 w-4" />
+            <span>Get In Touch</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Ready to Transform Your Business?
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Let's discuss your project and create a customized digital strategy that drives real results for your business.
+          </p>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className={`text-center mb-16 transition-all duration-1000 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
-            <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium mb-4 animate-bounce-slow">
-              <Sparkles className="h-4 w-4 animate-spin" />
-              <span>Get In Touch</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-slide-in-left">
-              Ready to Start Your Project?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in-right">
-              Let's discuss how we can help transform your digital presence and drive your business forward.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
-            <div className={`bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 animate-fade-in">Send us a message</h3>
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Contact Form */}
+          <div className={`transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h3>
               
-              {/* Success Message */}
               {isSubmitted && (
-                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center space-x-3 animate-scale-in">
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center space-x-3">
                   <CheckCircle className="h-5 w-5 text-green-600" />
                   <div>
                     <p className="text-green-800 font-medium">Message sent successfully!</p>
@@ -189,9 +168,8 @@ Best regards`);
                 </div>
               )}
 
-              {/* Error Message */}
               {submitError && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center space-x-3 animate-scale-in">
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center space-x-3">
                   <AlertCircle className="h-5 w-5 text-red-600" />
                   <div>
                     <p className="text-red-800 font-medium">Error sending message</p>
@@ -202,7 +180,7 @@ Best regards`);
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="animate-slide-up stagger-1">
+                  <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                       Full Name *
                     </label>
@@ -214,12 +192,12 @@ Best regards`);
                       onChange={handleChange}
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
                       placeholder="John Doe"
                     />
                   </div>
                   
-                  <div className="animate-slide-up stagger-2">
+                  <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email Address *
                     </label>
@@ -231,13 +209,13 @@ Best regards`);
                       onChange={handleChange}
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
                       placeholder="john@example.com"
                     />
                   </div>
                 </div>
                 
-                <div className="animate-slide-up stagger-3">
+                <div>
                   <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
                     Service Interested In *
                   </label>
@@ -248,18 +226,19 @@ Best regards`);
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
                   >
                     <option value="">Select a service</option>
-                    <option value="website-design">Website Design & Development</option>
+                    <option value="sales-funnel">Sales Funnel Development</option>
                     <option value="ui-ux">UI/UX Design</option>
-                    <option value="funnel">Funnel Development</option>
-                    <option value="consultation">Consultation</option>
+                    <option value="gmb-optimization">GMB Optimization</option>
+                    <option value="social-media">Social Media Management</option>
+                    <option value="consultation">Free Consultation</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
                 
-                <div className="animate-slide-up stagger-4">
+                <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                     Project Details *
                   </label>
@@ -271,15 +250,15 @@ Best regards`);
                     required
                     disabled={isSubmitting}
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all duration-300 resize-none hover:border-brand-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    placeholder="Tell us about your project requirements, timeline, and budget..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none disabled:opacity-50"
+                    placeholder="Tell us about your project requirements, goals, and timeline..."
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
                   disabled={isSubmitting || isSubmitted}
-                  className="w-full bg-gradient-to-r from-brand-blue-600 to-brand-green-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:from-brand-blue-700 hover:to-brand-green-600 hover:scale-105 shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed animate-pulse-glow hover:animate-bounce"
+                  className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
@@ -293,85 +272,89 @@ Best regards`);
                     </>
                   ) : (
                     <>
-                      <Send className="h-5 w-5 group-hover:animate-bounce" />
+                      <Send className="h-5 w-5" />
                       <span>Send Message</span>
                     </>
                   )}
                 </button>
               </form>
             </div>
+          </div>
 
-            {/* Contact Information */}
-            <div className={`space-y-8 transition-all duration-1000 delay-500 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
-              <div className="animate-fade-in">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h3>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  We'd love to hear about your project. Choose your preferred way to reach us and we'll respond as soon as possible.
-                </p>
-              </div>
+          {/* Contact Information */}
+          <div className={`space-y-8 transition-all duration-1000 delay-500 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h3>
+              <p className="text-gray-600 leading-relaxed mb-8">
+                Ready to take your business to the next level? We'd love to hear about your project and discuss how we can help you achieve your goals.
+              </p>
+            </div>
 
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon;
-                  const colorClass = getColorClasses(info.color);
-                  return (
-                    <div 
-                      key={index} 
-                      className={`flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer animate-slide-up bg-white rounded-xl p-4 shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-200`} 
-                      style={{ animationDelay: `${index * 200 + 600}ms` }}
-                      onClick={info.onClick}
-                    >
-                      <div className={`w-12 h-12 bg-gradient-to-r ${colorClass} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-pulse-glow`}>
-                        <Icon className="h-6 w-6 text-white group-hover:animate-bounce" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-brand-blue-600 transition-colors duration-300 flex items-center">
-                          {info.title}
-                          <ExternalLink className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </h4>
-                        <p className="text-gray-900 font-medium mb-1 group-hover:text-brand-green-600 transition-colors duration-300">
-                          {info.details}
-                        </p>
-                        <p className="text-gray-600 text-sm">
-                          {info.subtitle}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Enhanced CTA Section */}
-              <div className="bg-gradient-to-r from-brand-blue-600 to-brand-green-500 rounded-2xl p-8 text-white relative overflow-hidden animate-gradient-x">
-                {/* Animated background elements */}
-                <div className="absolute top-4 right-4 w-6 h-6 border-2 border-white/20 rounded-full animate-spin"></div>
-                <div className="absolute bottom-4 left-4 w-4 h-4 bg-white/10 rounded-full animate-pulse"></div>
-                
-                <div className="relative z-10">
-                  <h4 className="text-xl font-bold mb-3 animate-slide-in-left">Ready to get started?</h4>
-                  <p className="mb-4 opacity-90 animate-slide-in-right">
-                    Schedule a consultation call to discuss your project requirements in detail.
-                  </p>
-                  <button 
-                    onClick={handleScheduleCall}
-                    className="bg-white text-brand-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 animate-bounce-slow hover:animate-pulse flex items-center space-x-2"
+            <div className="space-y-6">
+              {contactInfo.map((info, index) => {
+                const Icon = info.icon;
+                return (
+                  <div 
+                    key={index} 
+                    className="flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer bg-white rounded-xl p-6 shadow-sm hover:shadow-md" 
+                    onClick={info.onClick}
                   >
-                    <Calendar className="h-5 w-5" />
-                    <span>Schedule a Call</span>
-                  </button>
-                </div>
+                    <div className={`w-12 h-12 bg-gradient-to-r ${
+                      info.color === 'blue' ? 'from-blue-600 to-blue-700' :
+                      info.color === 'green' ? 'from-green-600 to-green-700' :
+                      'from-purple-600 to-purple-700'
+                    } rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors flex items-center">
+                        {info.title}
+                        <ExternalLink className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </h4>
+                      <p className="text-gray-900 font-medium mb-1">{info.details}</p>
+                      <p className="text-gray-600 text-sm">{info.subtitle}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Social Links */}
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h4>
+              <div className="flex space-x-4">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-10 h-10 ${social.color} rounded-lg flex items-center justify-center text-white hover:scale-110 transition-transform shadow-sm`}
+                  >
+                    <span className="text-sm font-bold">{social.name[0]}</span>
+                  </a>
+                ))}
               </div>
+            </div>
+
+            {/* Free Consultation CTA */}
+            <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-xl p-6 text-white">
+              <div className="flex items-center space-x-3 mb-4">
+                <Calendar className="h-6 w-6" />
+                <h4 className="text-xl font-bold">Free Consultation</h4>
+              </div>
+              <p className="mb-4 opacity-90">
+                Book a free 30-minute consultation to discuss your project and get expert advice on your digital strategy.
+              </p>
+              <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2">
+                <Calendar className="h-5 w-5" />
+                <span>Schedule Now</span>
+              </button>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Meeting Scheduler Modal */}
-      <MeetingScheduler 
-        isOpen={showMeetingScheduler}
-        onClose={() => setShowMeetingScheduler(false)}
-      />
-    </>
+      </div>
+    </section>
   );
 };
 

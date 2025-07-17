@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Users, Award, Lightbulb, Target, Sparkles } from 'lucide-react';
+import { Award, Users, Target, Lightbulb, CheckCircle, Star } from 'lucide-react';
 
 const About = () => {
   const [isInView, setIsInView] = useState(false);
-  const [animatedStats, setAnimatedStats] = useState({ years: 0, projects: 0 });
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -12,23 +11,6 @@ const About = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsInView(true);
-            
-            // Animate stats numbers
-            const animateNumber = (target: number, key: 'years' | 'projects') => {
-              let current = 0;
-              const increment = target / 50;
-              const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                  current = target;
-                  clearInterval(timer);
-                }
-                setAnimatedStats(prev => ({ ...prev, [key]: Math.floor(current) }));
-              }, 30);
-            };
-
-            setTimeout(() => animateNumber(3, 'years'), 500);
-            setTimeout(() => animateNumber(100, 'projects'), 700);
           }
         });
       },
@@ -42,114 +24,124 @@ const About = () => {
     return () => observer.disconnect();
   }, []);
 
+  const achievements = [
+    { number: '5+', label: 'Years Experience' },
+    { number: '150+', label: 'Projects Delivered' },
+    { number: '98%', label: 'Client Satisfaction' },
+    { number: '50+', label: 'Happy Clients' }
+  ];
+
   const values = [
+    {
+      icon: Target,
+      title: 'Results-Driven',
+      description: 'Every project is focused on delivering measurable business outcomes and ROI.'
+    },
     {
       icon: Lightbulb,
       title: 'Innovation',
-      description: 'We stay ahead of digital trends to deliver cutting-edge solutions.',
-      color: 'yellow'
+      description: 'We stay ahead of digital trends to provide cutting-edge solutions.'
     },
     {
       icon: Users,
-      title: 'Collaboration',
-      description: 'We work closely with clients to understand and exceed their goals.',
-      color: 'blue'
+      title: 'Client-Centric',
+      description: 'Your success is our priority. We work closely to understand your goals.'
     },
     {
       icon: Award,
       title: 'Excellence',
-      description: 'Quality is at the heart of everything we create and deliver.',
-      color: 'green'
-    },
-    {
-      icon: Target,
-      title: 'Results',
-      description: 'We focus on measurable outcomes that drive business growth.',
-      color: 'purple'
+      description: 'Quality and attention to detail in every aspect of our work.'
     }
   ];
 
-  const getColorClasses = (color: string) => {
-    const colors = {
-      yellow: 'from-yellow-500 to-orange-500',
-      blue: 'from-brand-blue-600 to-brand-blue-700',
-      green: 'from-brand-green-600 to-brand-green-700',
-      purple: 'from-purple-600 to-purple-700'
-    };
-    return colors[color as keyof typeof colors];
-  };
-
   return (
-    <section ref={sectionRef} id="about" className="py-20 bg-white relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-r from-brand-blue-100/30 to-brand-green-100/30 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 left-20 w-48 h-48 bg-gradient-to-r from-purple-100/30 to-pink-100/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section ref={sectionRef} id="about" className="py-20 bg-gray-50 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Content - Founder Bio */}
           <div className={`transition-all duration-1000 ${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
-            <div className="inline-flex items-center space-x-2 bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium mb-6 animate-bounce-slow">
-              <Sparkles className="h-4 w-4 animate-spin" />
-              <span>About Us</span>
+            <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <Star className="h-4 w-4" />
+              <span>About Our Founder</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-slide-up">
-              Crafting Digital Excellence Since Day One
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Meet Adebayo Hammed
             </h2>
             
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed animate-fade-in">
-              At Hakad Digital Lab, we're passionate about transforming businesses through innovative digital solutions. 
-              Our team combines creativity with technical expertise to deliver exceptional results.
+            <div className="relative mb-8">
+              <div className="w-32 h-32 bg-gradient-to-br from-blue-600 to-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <span className="text-4xl font-bold text-white">AH</span>
+              </div>
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                <CheckCircle className="h-5 w-5 text-white" />
+              </div>
+            </div>
+            
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+              Founder and Lead Digital Strategist at HAKAD Digital Lab, Adebayo Hammed brings over 5 years 
+              of experience in digital marketing and business growth. His passion for helping businesses 
+              thrive in the digital landscape has driven the success of 150+ projects.
             </p>
             
-            <p className="text-gray-600 mb-8 leading-relaxed animate-fade-in stagger-2">
-              We believe that great design isn't just about looking good – it's about creating meaningful experiences 
-              that connect brands with their audiences and drive real business outcomes.
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              With expertise spanning sales funnel optimization, UI/UX design, GMB management, and social 
+              media strategy, Adebayo has helped businesses increase their online presence and revenue by 
+              an average of 250%.
             </p>
 
             <div className="grid grid-cols-2 gap-6">
-              <div className="text-center p-4 bg-gradient-to-r from-brand-blue-50 to-purple-50 rounded-xl hover:scale-105 transition-all duration-300 animate-scale-in stagger-3">
-                <div className="text-3xl font-bold text-gray-900 mb-2 animate-pulse-glow">
-                  {animatedStats.years}+
+              {achievements.map((achievement, index) => (
+                <div key={index} className="text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">{achievement.number}</div>
+                  <div className="text-gray-600 text-sm">{achievement.label}</div>
                 </div>
-                <div className="text-gray-600">Years of Excellence</div>
-              </div>
-              <div className="text-center p-4 bg-gradient-to-r from-purple-50 to-brand-green-50 rounded-xl hover:scale-105 transition-all duration-300 animate-scale-in stagger-4">
-                <div className="text-3xl font-bold text-gray-900 mb-2 animate-pulse-glow">
-                  {animatedStats.projects}+
-                </div>
-                <div className="text-gray-600">Projects Delivered</div>
-              </div>
+              ))}
             </div>
           </div>
 
-          <div className={`grid grid-cols-2 gap-6 transition-all duration-1000 delay-500 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
-            {values.map((value, index) => {
-              const Icon = value.icon;
-              const colorClass = getColorClasses(value.color);
-              return (
-                <div
-                  key={index}
-                  className={`bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-2xl hover:shadow-lg transition-all duration-500 group hover:-translate-y-2 hover:rotate-1 animate-scale-in`}
-                  style={{ animationDelay: `${index * 200 + 800}ms` }}
-                >
-                  <div className={`w-12 h-12 bg-gradient-to-r ${colorClass} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 animate-pulse-glow`}>
-                    <Icon className="h-6 w-6 text-white group-hover:animate-bounce" />
+          {/* Right Content - Values */}
+          <div className={`transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
+            <h3 className="text-2xl font-bold text-gray-900 mb-8">Our Core Values</h3>
+            
+            <div className="space-y-6">
+              {values.map((value, index) => {
+                const Icon = value.icon;
+                return (
+                  <div
+                    key={index}
+                    className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-2">{value.title}</h4>
+                      <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-brand-blue-600 transition-colors duration-300">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                    {value.description}
-                  </p>
-                  
-                  {/* Animated decorative elements */}
-                  <div className="absolute top-2 right-2 w-2 h-2 bg-brand-blue-400 rounded-full opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+
+            {/* Call to Action */}
+            <div className="mt-8 p-6 bg-gradient-to-r from-blue-600 to-green-600 rounded-xl text-white">
+              <h4 className="text-xl font-bold mb-2">Ready to Transform Your Business?</h4>
+              <p className="mb-4 opacity-90">
+                Let's discuss how we can help you achieve your digital goals and drive real growth.
+              </p>
+              <button 
+                onClick={() => {
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Start Your Project
+              </button>
+            </div>
           </div>
         </div>
       </div>
