@@ -4,11 +4,12 @@ import type { Database } from '../types/database.types';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://zspdsmchyrkadgdjiuyb.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase environment variables not found. Please add VITE_SUPABASE_ANON_KEY to your .env file.');
+if (!supabaseAnonKey) {
+  console.error('❌ VITE_SUPABASE_ANON_KEY is required. Please add it to your .env file.');
+  throw new Error('Supabase anonymous key is required. Please check your .env file.');
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey || '', {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
