@@ -4,15 +4,12 @@ import type { Database } from '../types/database.types';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://zspdsmchyrkadgdjiuyb.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// For development purposes, use a placeholder if no key is provided
-const defaultKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpzcGRzbWNoeXJrYWRnZGppdXliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU1MTQ0MDAsImV4cCI6MjA1MTA5MDQwMH0.placeholder_key_for_development';
-const finalKey = supabaseAnonKey || defaultKey;
-
 if (!supabaseAnonKey) {
-  console.warn('⚠️ Using placeholder Supabase key. Please add your actual VITE_SUPABASE_ANON_KEY to your .env file for production.');
+  console.error('❌ VITE_SUPABASE_ANON_KEY is missing. Please add your Supabase anonymous key to your .env file.');
+  console.log('📝 Get your key from: https://supabase.com/dashboard/project/zspdsmchyrkadgdjiuyb/settings/api');
 }
 
-export const supabase = createClient<Database>(supabaseUrl, finalKey, {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey || '', {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
@@ -31,9 +28,20 @@ export const supabase = createClient<Database>(supabaseUrl, finalKey, {
 // Test connection function
 export const testConnection = async () => {
   try {
+    if (!supabaseAnonKey) {
+      console.error('❌ Cannot test connection: Supabase anonymous key is missing');
+      return false;
+    }
+    
     const { data, error } = await supabase.from('contacts').select('count', { count: 'exact', head: true });
     if (error) {
-      console.error('Supabase connection error:', error);
+      if (error.code === 'PGRST301') {
+        console.error('❌ Supabase connection error: Invalid API key or expired token');
+        console.log('📝 Please update your VITE_SUPABASE_ANON_KEY in the .env file');
+        console.log('🔗 Get your key from: https://supabase.com/dashboard/project/zspdsmchyrkadgdjiuyb/settings/api');
+      } else {
+        console.error('❌ Supabase connection error:', error);
+      }
       return false;
     }
     console.log('✅ Supabase connected successfully');
