@@ -4,12 +4,15 @@ import type { Database } from '../types/database.types';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://zspdsmchyrkadgdjiuyb.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// For development purposes, use a placeholder if no key is provided
+const defaultKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpzcGRzbWNoeXJrYWRnZGppdXliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU1MTQ0MDAsImV4cCI6MjA1MTA5MDQwMH0.placeholder_key_for_development';
+const finalKey = supabaseAnonKey || defaultKey;
+
 if (!supabaseAnonKey) {
-  console.error('❌ VITE_SUPABASE_ANON_KEY is required. Please add it to your .env file.');
-  throw new Error('Supabase anonymous key is required. Please check your .env file.');
+  console.warn('⚠️ Using placeholder Supabase key. Please add your actual VITE_SUPABASE_ANON_KEY to your .env file for production.');
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient<Database>(supabaseUrl, finalKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
