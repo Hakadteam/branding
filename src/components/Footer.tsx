@@ -1,6 +1,7 @@
 import React from 'react';
-import { Mail, Phone, MapPin, ExternalLink, Heart } from 'lucide-react';
+import { Mail, Phone, MapPin, ExternalLink, Heart, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 import { newsletterService } from '../lib/supabase';
+import Logo from './Logo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -80,10 +81,34 @@ Best regards`);
   };
 
   const socialLinks = [
-    { name: 'LinkedIn', url: 'https://linkedin.com/company/hakaddigitallab', color: 'hover:bg-blue-600' },
-    { name: 'Twitter', url: 'https://twitter.com/hakaddigitallab', color: 'hover:bg-blue-400' },
-    { name: 'Instagram', url: 'https://instagram.com/hakaddigitallab', color: 'hover:bg-pink-600' },
-    { name: 'Facebook', url: 'https://facebook.com/hakaddigitallab', color: 'hover:bg-blue-700' }
+    { 
+      name: 'LinkedIn', 
+      url: 'https://linkedin.com/company/hakaddigitallab', 
+      icon: Linkedin,
+      color: 'hover:bg-blue-600',
+      bgColor: 'bg-blue-600'
+    },
+    { 
+      name: 'Twitter', 
+      url: 'https://twitter.com/hakaddigitallab', 
+      icon: Twitter,
+      color: 'hover:bg-blue-400',
+      bgColor: 'bg-blue-400'
+    },
+    { 
+      name: 'Instagram', 
+      url: 'https://instagram.com/hakaddigitallab', 
+      icon: Instagram,
+      color: 'hover:bg-pink-600',
+      bgColor: 'bg-pink-600'
+    },
+    { 
+      name: 'Facebook', 
+      url: 'https://facebook.com/hakaddigitallab', 
+      icon: Facebook,
+      color: 'hover:bg-blue-700',
+      bgColor: 'bg-blue-700'
+    }
   ];
 
   return (
@@ -93,14 +118,13 @@ Best regards`);
         <div className="py-16 grid lg:grid-cols-4 md:grid-cols-2 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">H</span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">HAKAD Digital Lab</h3>
-                <p className="text-gray-400 text-sm">Digital Excellence</p>
-              </div>
+            <div className="mb-6">
+              <Logo 
+                size="lg" 
+                className="mb-4 filter brightness-0 invert"
+              />
+              <h3 className="text-xl font-bold text-white mb-1">HAKAD Digital Lab</h3>
+              <p className="text-gray-400 text-sm">Digital Excellence</p>
             </div>
             
             <p className="text-gray-300 mb-6 leading-relaxed">
@@ -198,17 +222,21 @@ Best regards`);
             </div>
 
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center ${social.color} transition-all duration-300 hover:scale-110 shadow-sm`}
-                >
-                  <span className="text-sm font-bold text-gray-300">{social.name[0]}</span>
-                </a>
-              ))}
+              {socialLinks.map((social, index) => {
+                const IconComponent = social.icon;
+                return (
+                  <a
+                    key={index}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-10 h-10 ${social.bgColor} rounded-lg flex items-center justify-center ${social.color} transition-all duration-300 hover:scale-110 shadow-lg group`}
+                    aria-label={`Follow us on ${social.name}`}
+                  >
+                    <IconComponent className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
