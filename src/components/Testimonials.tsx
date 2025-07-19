@@ -165,6 +165,27 @@ const Testimonials = () => {
             {/* Navigation Buttons */}
             <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between pointer-events-none">
               <button
+                onClick={prevTestimonial}
+                className="bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-lg transition-all pointer-events-auto"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-lg transition-all pointer-events-auto"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-8">
+            <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Ready to Join Our Success Stories?</h3>
+              <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+                Let's create your success story together. Get started with a free consultation and discover how we can transform your business.
+              </p>
               <SchedulingButton
                 variant="outline"
                 size="lg"
