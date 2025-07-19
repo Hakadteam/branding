@@ -1,10 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TrendingUp, Palette, Search, Share2, ArrowRight, CheckCircle, Star } from 'lucide-react';
+import { useScheduling } from '../hooks/useScheduling';
+import SchedulingModal from './SchedulingModal';
+import SchedulingButton from './SchedulingButton';
 
 const Services = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { isModalOpen, buttonType, openScheduling, closeScheduling } = useScheduling();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -155,12 +159,15 @@ const Services = () => {
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto text-lg">
                 Let's discuss your project and create a customized digital strategy that drives real results for your business.
               </p>
-              <button 
-                onClick={scrollToContact}
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
+              <SchedulingButton
+                variant="outline"
+                size="lg"
+                type="consultation"
+                onClick={() => openScheduling('consultation')}
+                className="bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-white"
               >
                 Book a Free Consultation
-              </button>
+              </SchedulingButton>
             </div>
             
             {/* Background decoration */}
@@ -168,6 +175,13 @@ const Services = () => {
             <div className="absolute bottom-4 left-4 w-6 h-6 border-2 border-white/20 rounded-full animate-ping"></div>
           </div>
         </div>
+        
+        {/* Scheduling Modal */}
+        <SchedulingModal
+          isOpen={isModalOpen}
+          onClose={closeScheduling}
+          buttonType={buttonType}
+        />
       </div>
     </section>
   );

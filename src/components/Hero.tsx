@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Play, Star, Zap, TrendingUp } from 'lucide-react';
+import { useScheduling } from '../hooks/useScheduling';
+import SchedulingModal from './SchedulingModal';
+import SchedulingButton from './SchedulingButton';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { isModalOpen, buttonType, openScheduling, closeScheduling } = useScheduling();
 
   useEffect(() => {
     setIsVisible(true);
@@ -54,13 +58,12 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button
-                onClick={scrollToContact}
-                className="group bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl flex items-center justify-center space-x-2 shadow-lg"
-              >
-                <span>Get Started Today</span>
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <SchedulingButton
+                variant="primary"
+                size="lg"
+                type="consultation"
+                onClick={() => openScheduling('consultation')}
+              />
               
               <button 
                 onClick={scrollToServices}
@@ -136,6 +139,13 @@ const Hero = () => {
             </div>
           </div>
         </div>
+        
+        {/* Scheduling Modal */}
+        <SchedulingModal
+          isOpen={isModalOpen}
+          onClose={closeScheduling}
+          buttonType={buttonType}
+        />
       </div>
     </section>
   );

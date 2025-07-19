@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, Star, MessageCircle, Calendar, ExternalLink, AlertCircle } from 'lucide-react';
 import { contactService } from '../lib/supabase';
+import { useScheduling } from '../hooks/useScheduling';
+import SchedulingModal from './SchedulingModal';
+import SchedulingButton from './SchedulingButton';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +16,7 @@ const Contact = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { isModalOpen, buttonType, openScheduling, closeScheduling } = useScheduling();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -354,13 +358,25 @@ Best regards`);
               <p className="mb-4 opacity-90">
                 Book a free 30-minute consultation to discuss your project and get expert advice on your digital strategy.
               </p>
-              <button className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2">
-                <Calendar className="h-5 w-5" />
-                <span>Schedule Now</span>
-              </button>
+              <SchedulingButton
+                variant="outline"
+                size="md"
+                type="schedule"
+                onClick={() => openScheduling('schedule')}
+                className="bg-white text-green-600 hover:bg-green-600 hover:text-white border-white"
+              >
+                Schedule Now
+              </SchedulingButton>
             </div>
           </div>
         </div>
+        
+        {/* Scheduling Modal */}
+        <SchedulingModal
+          isOpen={isModalOpen}
+          onClose={closeScheduling}
+          buttonType={buttonType}
+        />
       </div>
     </section>
   );

@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ExternalLink, Eye, ArrowRight, Star } from 'lucide-react';
+import { useScheduling } from '../hooks/useScheduling';
+import SchedulingModal from './SchedulingModal';
+import SchedulingButton from './SchedulingButton';
 
 const Portfolio = () => {
   const [isInView, setIsInView] = useState(false);
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
+  const { isModalOpen, buttonType, openScheduling, closeScheduling } = useScheduling();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -196,13 +200,17 @@ const Portfolio = () => {
               <p className="text-blue-100 mb-6 max-w-2xl mx-auto text-lg">
                 Let's discuss your vision and create something amazing together. Book a free consultation to get started.
               </p>
-              <button 
-                onClick={scrollToContact}
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg flex items-center space-x-2 mx-auto"
-              >
-                <span>Book a Free Consultation</span>
-                <ExternalLink className="h-5 w-5" />
-              </button>
+              <div className="flex justify-center">
+                <SchedulingButton
+                  variant="outline"
+                  size="lg"
+                  type="consultation"
+                  onClick={() => openScheduling('consultation')}
+                  className="bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-white"
+                >
+                  Book a Free Consultation
+                </SchedulingButton>
+              </div>
             </div>
             
             {/* Background decoration */}
@@ -210,6 +218,13 @@ const Portfolio = () => {
             <div className="absolute bottom-4 left-4 w-6 h-6 border-2 border-white/20 rounded-full animate-ping"></div>
           </div>
         </div>
+        
+        {/* Scheduling Modal */}
+        <SchedulingModal
+          isOpen={isModalOpen}
+          onClose={closeScheduling}
+          buttonType={buttonType}
+        />
       </div>
     </section>
   );
