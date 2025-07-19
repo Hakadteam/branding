@@ -6,7 +6,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,7 +49,7 @@ const Contact = () => {
     setSubmitError(null);
 
     try {
-      if (!formData.name.trim() || !formData.email.trim() || !formData.service || !formData.message.trim()) {
+      if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
         throw new Error('Please fill in all required fields');
       }
 
@@ -62,12 +61,12 @@ const Contact = () => {
       await contactService.create({
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
-        service: formData.service,
+        service: 'general-inquiry',
         message: formData.message.trim()
       });
 
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', service: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       
       setTimeout(() => setIsSubmitted(false), 5000);
       
@@ -145,10 +144,10 @@ Best regards`);
             <span>Get In Touch</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Ready to Transform Your Business?
+            Let's Work Together
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Let's discuss your project and create a customized digital strategy that drives real results for your business.
+            Reach out to discuss your project or book a free consultation.
           </p>
         </div>
 
@@ -179,68 +178,43 @@ Best regards`);
               )}
               
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      disabled={isSubmitting}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
-                      placeholder="John Doe"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      disabled={isSubmitting}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-                </div>
-                
                 <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Interested In *
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Name *
                   </label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="sales-funnel">Sales Funnel Development</option>
-                    <option value="ui-ux">UI/UX Design</option>
-                    <option value="gmb-optimization">GMB Optimization</option>
-                    <option value="social-media">Social Media Management</option>
-                    <option value="consultation">Free Consultation</option>
-                    <option value="other">Other</option>
-                  </select>
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
+                    placeholder="Your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 disabled:opacity-50"
+                    placeholder="your.email@example.com"
+                  />
                 </div>
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Details *
+                    Message *
                   </label>
                   <textarea
                     id="message"
@@ -250,15 +224,15 @@ Best regards`);
                     required
                     disabled={isSubmitting}
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none disabled:opacity-50"
-                    placeholder="Tell us about your project requirements, goals, and timeline..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 resize-none disabled:opacity-50"
+                    placeholder="Tell us about your project or how we can help you..."
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
                   disabled={isSubmitting || isSubmitted}
-                  className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
@@ -284,61 +258,95 @@ Best regards`);
           {/* Contact Information */}
           <div className={`space-y-8 transition-all duration-1000 delay-500 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Ready to take your business to the next level? We'd love to hear about your project and discuss how we can help you achieve your goals.
+                Ready to take your business to the next level? Get in touch with us directly through any of these channels.
               </p>
             </div>
 
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <div 
-                    key={index} 
-                    className="flex items-start space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer bg-white rounded-xl p-6 shadow-sm hover:shadow-md" 
-                    onClick={info.onClick}
-                  >
-                    <div className={`w-12 h-12 bg-gradient-to-r ${
-                      info.color === 'blue' ? 'from-blue-600 to-blue-700' :
-                      info.color === 'green' ? 'from-green-600 to-green-700' :
-                      'from-purple-600 to-purple-700'
-                    } rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors flex items-center">
-                        {info.title}
-                        <ExternalLink className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </h4>
-                      <p className="text-gray-900 font-medium mb-1">{info.details}</p>
-                      <p className="text-gray-600 text-sm">{info.subtitle}</p>
-                    </div>
-                  </div>
-                );
-              })}
+            {/* Direct Contact Details */}
+            <div className="space-y-4">
+              <div 
+                className="flex items-center space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer bg-white rounded-xl p-4 shadow-sm hover:shadow-md" 
+                onClick={handleEmailClick}
+              >
+                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Mail className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors flex items-center">
+                    Email Us
+                    <ExternalLink className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </h4>
+                  <p className="text-gray-900 font-medium">hakaddigitallab@gmail.com</p>
+                  <p className="text-gray-600 text-sm">Get a response within 24 hours</p>
+                </div>
+              </div>
+
+              <div 
+                className="flex items-center space-x-4 group hover:scale-105 transition-all duration-300 cursor-pointer bg-white rounded-xl p-4 shadow-sm hover:shadow-md" 
+                onClick={handlePhoneClick}
+              >
+                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Phone className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-1 group-hover:text-green-600 transition-colors flex items-center">
+                    Call Us
+                    <ExternalLink className="h-4 w-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </h4>
+                  <p className="text-gray-900 font-medium">+234 816 167 3433</p>
+                  <p className="text-gray-600 text-sm">Mon-Fri 9AM-6PM WAT</p>
+                </div>
+              </div>
             </div>
 
             {/* Social Links */}
             <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-10 h-10 ${social.color} rounded-lg flex items-center justify-center text-white hover:scale-110 transition-transform shadow-sm`}
-                  >
-                    <span className="text-sm font-bold">{social.name[0]}</span>
-                  </a>
-                ))}
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">Connect With Us</h4>
+              <div className="space-y-3">
+                <a
+                  href="https://instagram.com/hakaddigitallab"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-3 text-gray-700 hover:text-pink-600 transition-colors group"
+                >
+                  <div className="w-8 h-8 bg-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="text-white text-sm font-bold">IG</span>
+                  </div>
+                  <span className="font-medium">@hakaddigitallab</span>
+                  <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+                
+                <a
+                  href="https://facebook.com/hakaddigitallab"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-3 text-gray-700 hover:text-blue-600 transition-colors group"
+                >
+                  <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <span className="text-white text-sm font-bold">FB</span>
+                  </div>
+                  <span className="font-medium">hakaddigitallab</span>
+                  <ExternalLink className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </div>
+            </div>
+
+            {/* Google Map Placeholder */}
+            <div className="bg-white rounded-xl p-6 shadow-sm">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">Our Location</h4>
+              <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
+                <div className="text-center">
+                  <MapPin className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-gray-600 font-medium">Lagos, Nigeria</p>
+                  <p className="text-gray-500 text-sm">Available for in-person meetings</p>
+                </div>
               </div>
             </div>
 
             {/* Free Consultation CTA */}
-            <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-xl p-6 text-white">
+            <div className="bg-green-600 rounded-xl p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <Calendar className="h-6 w-6" />
                 <h4 className="text-xl font-bold">Free Consultation</h4>
@@ -346,7 +354,7 @@ Best regards`);
               <p className="mb-4 opacity-90">
                 Book a free 30-minute consultation to discuss your project and get expert advice on your digital strategy.
               </p>
-              <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2">
+              <button className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2">
                 <Calendar className="h-5 w-5" />
                 <span>Schedule Now</span>
               </button>
