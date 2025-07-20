@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, MessageCircle, Star, Zap, TrendingUp, Users } from 'lucide-react';
 import SchedulingButton from './SchedulingButton';
+import { useScheduling } from '../hooks/useScheduling';
+import SchedulingModal from './SchedulingModal';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { isModalOpen, buttonType, openScheduling, closeScheduling } = useScheduling();
 
   useEffect(() => {
     setIsVisible(true);
@@ -54,7 +57,9 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <SchedulingButton 
                 variant="primary"
-                size="large"
+                size="lg"
+                type="consultation"
+                onClick={() => openScheduling('consultation')}
                 className="flex-1 sm:flex-none"
               >
                 Get Started Today
@@ -135,6 +140,13 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Scheduling Modal */}
+      <SchedulingModal
+        isOpen={isModalOpen}
+        onClose={closeScheduling}
+        buttonType={buttonType}
+      />
     </section>
   );
 };
