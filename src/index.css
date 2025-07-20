@@ -10,6 +10,39 @@
 }
 
 @layer utilities {
+  /* Typography improvements */
+  .text-7xl {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+  
+  .text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+  
+  /* Improved button styles */
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg;
+  }
+  
+  .btn-success {
+    @apply bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg;
+  }
+  
+  /* Improved spacing */
+  .section-padding {
+    @apply py-24;
+  }
+  
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
   .animate-gradient-x {
     animation: gradient-x 3s ease infinite;
     background-size: 200% 200%;

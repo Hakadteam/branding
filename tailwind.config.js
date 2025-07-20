@@ -6,6 +6,15 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
+      fontSize: {
+        '7xl': ['4.5rem', { lineHeight: '1' }],
+        '6xl': ['3.75rem', { lineHeight: '1' }],
+        '5xl': ['3rem', { lineHeight: '1' }],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+      },
       colors: {
         // HAKAD Digital Lab Brand Colors
         blue: {

@@ -115,10 +115,10 @@ const Testimonials = () => {
             <span>Client Testimonials</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            What Our Clients Say
+            What Clients Are Saying
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what our satisfied clients have to say about their experience with HAKAD Digital Lab.
+            Real results. Happy clients.
           </p>
         </div>
 
@@ -240,21 +240,23 @@ const Testimonials = () => {
         {/* Call to Action */}
         <div className={`text-center mt-16 transition-all duration-1000 delay-600 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
           <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Ready to Join Our Success Stories?</h3>
+            <h3 className="text-2xl font-bold mb-4">Ready to Be Our Next Success Story?</h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Let's create your success story together. Get started with a free consultation and discover how we can transform your business.
+              Let's create your success story together. Get started with a free consultation and discover how we can grow your business.
             </p>
-            <button 
+            <SchedulingButton 
+              variant="secondary"
+              size="large"
+              className="mx-auto"
               onClick={() => {
                 const element = document.getElementById('contact');
                 if (element) {
                   element.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
             >
-              Get Your Free Consultation
-            </button>
+              Get Started Today
+            </SchedulingButton>
           </div>
         </div>
         
