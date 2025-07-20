@@ -1,14 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { TrendingUp, Palette, Search, Share2, ArrowRight, CheckCircle, Star } from 'lucide-react';
-import { useScheduling } from '../hooks/useScheduling';
-import SchedulingModal from './SchedulingModal';
+import { TrendingUp, Palette, Search, Share2, Star } from 'lucide-react';
 import SchedulingButton from './SchedulingButton';
 
 const Services = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const { isModalOpen, buttonType, openScheduling, closeScheduling } = useScheduling();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,117 +32,77 @@ const Services = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const services = [
     {
       icon: TrendingUp,
-      title: 'Funnel Development',
-      description: 'High-converting funnels built to drive leads and sales.',
+      title: 'Sales Funnel Development',
+      description: 'High-converting funnels that turn visitors into customers. We build automated systems that capture leads and drive sales 24/7.',
       color: 'blue',
       gradient: 'from-blue-600 to-blue-700'
     },
     {
       icon: Palette,
       title: 'UI/UX Design',
-      description: 'Intuitive and visually engaging user experiences.',
+      description: 'Beautiful, user-friendly designs that convert. We create websites and apps that your customers love to use and buy from.',
       color: 'green',
       gradient: 'from-green-600 to-green-700'
     },
     {
       icon: Search,
-      title: 'GMB Optimization',
-      description: 'Local visibility through Google Business setup & ranking.',
+      title: 'Google Business Optimization',
+      description: 'Get found by local customers searching for your services. We optimize your Google presence to drive more calls and visits.',
       color: 'purple',
       gradient: 'from-purple-600 to-purple-700'
     },
     {
       icon: Share2,
       title: 'Social Media Management',
-      description: 'Consistent content and community management.',
+      description: 'Build a strong online presence that attracts customers. We create content and manage your social media to grow your brand.',
       color: 'orange',
       gradient: 'from-orange-600 to-orange-700'
     }
   ];
 
-  const getColorClasses = (color: string) => {
-    const colors = {
-      blue: {
-        bg: 'bg-blue-50',
-        text: 'text-blue-600',
-        border: 'border-blue-200',
-        hover: 'hover:bg-blue-100'
-      },
-      green: {
-        bg: 'bg-green-50',
-        text: 'text-green-600',
-        border: 'border-green-200',
-        hover: 'hover:bg-green-100'
-      },
-      purple: {
-        bg: 'bg-purple-50',
-        text: 'text-purple-600',
-        border: 'border-purple-200',
-        hover: 'hover:bg-purple-100'
-      },
-      orange: {
-        bg: 'bg-orange-50',
-        text: 'text-orange-600',
-        border: 'border-orange-200',
-        hover: 'hover:bg-orange-100'
-      }
-    };
-    return colors[color as keyof typeof colors];
-  };
-
   return (
-    <section ref={sectionRef} id="services" className="py-20 bg-white relative overflow-hidden">
+    <section ref={sectionRef} id="services" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-green-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+        <div className={`text-center mb-20 transition-all duration-1000 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-green-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-8">
             <Star className="h-4 w-4" />
-            <span>Our Core Services</span>
+            <span>Our Services</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Our Core Services
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
+            How We Help You <span className="text-blue-600">Grow</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Built to help your business grow with strategy, design, and digital execution.
+          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            We provide complete digital solutions that increase your visibility, automate your processes, and improve customer experience.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 mb-20">
           {services.map((service, index) => {
-            const colorClasses = getColorClasses(service.color);
             const Icon = service.icon;
             const isVisible = visibleCards.includes(index);
             
             return (
               <div
                 key={index}
-                className={`service-card group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-700 overflow-hidden border border-gray-100 hover:border-gray-200 transform ${
+                className={`service-card group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-700 overflow-hidden border border-gray-100 hover:border-gray-200 transform ${
                   isVisible ? 'translate-y-0 opacity-100 animate-scale-in' : 'translate-y-10 opacity-0'
-                } hover:-translate-y-2`}
+                } hover:-translate-y-2 p-8 lg:p-10`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className="p-8">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${service.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    <Icon className="h-8 w-8 text-white" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors">
-                    {service.description}
-                  </p>
+                <div className={`w-20 h-20 bg-gradient-to-r ${service.gradient} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <Icon className="h-10 w-10 text-white" />
                 </div>
+                
+                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6 group-hover:text-blue-600 transition-colors">
+                  {service.title}
+                </h3>
+                
+                <p className="text-lg text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors">
+                  {service.description}
+                </p>
               </div>
             );
           })}
@@ -153,20 +110,18 @@ const Services = () => {
 
         {/* Call to Action Section */}
         <div className={`text-center transition-all duration-1000 delay-800 ${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
-          <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 text-white relative overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-green-600 rounded-3xl p-10 lg:p-12 text-white relative overflow-hidden">
             <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to Transform Your Business?</h3>
-              <p className="text-blue-100 mb-6 max-w-2xl mx-auto text-lg">
-                Let's discuss your project and create a customized digital strategy that drives real results for your business.
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Ready to Grow Your Business?</h3>
+              <p className="text-blue-100 mb-8 max-w-3xl mx-auto text-lg lg:text-xl leading-relaxed">
+                Let's discuss your goals and create a custom strategy that drives real results for your business.
               </p>
-              <SchedulingButton
-                variant="outline"
-                size="lg"
-                type="consultation"
-                onClick={() => openScheduling('consultation')}
-                className="bg-white text-blue-600 hover:bg-blue-600 hover:text-white border-white"
+              <SchedulingButton 
+                variant="secondary"
+                size="large"
+                className="mx-auto"
               >
-                Book a Free Consultation
+                Book Free Consultation
               </SchedulingButton>
             </div>
             
@@ -175,13 +130,6 @@ const Services = () => {
             <div className="absolute bottom-4 left-4 w-6 h-6 border-2 border-white/20 rounded-full animate-ping"></div>
           </div>
         </div>
-        
-        {/* Scheduling Modal */}
-        <SchedulingModal
-          isOpen={isModalOpen}
-          onClose={closeScheduling}
-          buttonType={buttonType}
-        />
       </div>
     </section>
   );

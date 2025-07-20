@@ -66,7 +66,7 @@ const About = () => {
             </div>
             
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Meet Adebayo Hammed
+              Meet Your Growth Partner
             </h2>
             
             <div className="relative mb-8">
@@ -79,15 +79,15 @@ const About = () => {
             </div>
             
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              Founder and Lead Digital Strategist at HAKAD Digital Lab, Adebayo Hammed brings over 5 years 
-              of experience in digital marketing and business growth. His passion for helping businesses 
-              thrive in the digital landscape has driven the success of 150+ projects.
+              <strong>Adebayo Hammed</strong>, Founder and Lead Digital Strategist at HAKAD Digital Lab, brings over 5 years 
+              of proven experience in digital marketing and business growth. His passion for helping businesses 
+              succeed online has driven the success of 150+ projects across Nigeria and beyond.
             </p>
             
             <p className="text-gray-600 mb-8 leading-relaxed">
-              With expertise spanning sales funnel optimization, UI/UX design, GMB management, and social 
-              media strategy, Adebayo has helped businesses increase their online presence and revenue by 
-              an average of 250%.
+              With deep expertise in sales funnel optimization, UI/UX design, Google Business management, and social 
+              media strategy, Adebayo has helped businesses increase their online visibility and revenue by 
+              an average of <strong>250%</strong> within 6 months.
             </p>
 
             <div className="grid grid-cols-2 gap-6">
@@ -126,9 +126,9 @@ const About = () => {
 
             {/* Call to Action */}
             <div className="mt-8 p-6 bg-gradient-to-r from-blue-600 to-green-600 rounded-xl text-white">
-              <h4 className="text-xl font-bold mb-2">Ready to Transform Your Business?</h4>
+              <h4 className="text-xl font-bold mb-2">Ready to Grow Your Business?</h4>
               <p className="mb-4 opacity-90">
-                Let's discuss how we can help you achieve your digital goals and drive real growth.
+                Let's discuss how we can help you achieve your business goals and drive real growth online.
               </p>
               <button 
                 onClick={() => {
@@ -139,7 +139,7 @@ const About = () => {
                 }}
                 className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
-                Start Your Project
+                Get Started Today
               </button>
             </div>
           </div>
