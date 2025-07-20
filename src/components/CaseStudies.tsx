@@ -36,49 +36,65 @@ const CaseStudies = () => {
   const caseStudies = [
     {
       id: 1,
-      projectName: 'TechFlow Solutions',
-      goal: 'Increase online lead generation for B2B software company',
-      result: '+280% conversion rate, $500K additional revenue in 3 months',
-      testimonial: 'Working with HAKAD Digital Lab was a game-changer. The sales funnel they created transformed our business completely.',
-      clientName: 'Sarah Johnson',
-      clientRole: 'Marketing Director',
+      projectName: 'Lagos Fashion House',
+      goal: 'Expand international reach and increase online sales for Nigerian fashion brand',
+      result: '+320% international orders, 45K Instagram followers, ₦25M additional revenue',
+      testimonial: 'HAKAD Digital Lab transformed our online presence completely. We went from local to international in just 4 months.',
+      clientName: 'Chioma Okafor',
+      clientRole: 'CEO',
       image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
       category: 'Sales Funnel',
       metrics: [
-        { label: 'Conversion Rate', value: '+280%' },
-        { label: 'Revenue Generated', value: '$500K' },
-        { label: 'Timeline', value: '3 months' }
+        { label: 'International Orders', value: '+320%' },
+        { label: 'Revenue Generated', value: '₦25M' },
+        { label: 'Timeline', value: '4 months' }
       ]
     },
     {
       id: 2,
-      projectName: 'Bella Vista Restaurants',
-      goal: 'Improve local visibility and increase customer calls',
-      result: '+220% local search visibility, +150% customer calls',
-      testimonial: 'Our restaurants are busier than ever thanks to the GMB optimization. The ROI has been incredible.',
-      clientName: 'Emily Rodriguez',
-      clientRole: 'Restaurant Owner',
+      projectName: 'Abuja Real Estate Group',
+      goal: 'Improve local visibility and increase property inquiries in Nigerian market',
+      result: '+340% local search visibility, +250% property inquiries, 60% more deals closed',
+      testimonial: 'The Google Business optimization was exceptional. We now dominate local real estate searches in Abuja.',
+      clientName: 'Amara Okonkwo',
+      clientRole: 'Managing Director',
       image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
       category: 'GMB Optimization',
       metrics: [
-        { label: 'Local Visibility', value: '+220%' },
-        { label: 'Customer Calls', value: '+150%' },
-        { label: 'Timeline', value: '2 months' }
+        { label: 'Local Visibility', value: '+340%' },
+        { label: 'Property Inquiries', value: '+250%' },
+        { label: 'Timeline', value: '3 months' }
       ]
     },
     {
       id: 3,
-      projectName: 'FitLife Coaching',
-      goal: 'Build social media presence and generate quality leads',
-      result: '+350% engagement, +200% lead generation, 180% follower growth',
-      testimonial: 'The social media strategy exceeded all expectations. Our engagement and leads have skyrocketed.',
-      clientName: 'David Thompson',
-      clientRole: 'Founder',
+      projectName: 'Port Harcourt Oil Services',
+      goal: 'Transition from traditional to digital marketing for B2B oil services company',
+      result: '₦50M+ new contracts, +380% B2B lead quality, expansion across West Africa',
+      testimonial: 'HAKAD Digital Lab helped us modernize our marketing. We now have clients across West Africa.',
+      clientName: 'Olumide Adebayo',
+      clientRole: 'CEO',
       image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'Social Media',
+      category: 'B2B Digital Strategy',
       metrics: [
-        { label: 'Engagement Rate', value: '+350%' },
-        { label: 'Lead Generation', value: '+200%' },
+        { label: 'New Contracts', value: '₦50M+' },
+        { label: 'Lead Quality', value: '+380%' },
+        { label: 'Timeline', value: '6 months' }
+      ]
+    },
+    {
+      id: 4,
+      projectName: 'Accra Tech Solutions',
+      goal: 'Redesign fintech app UI/UX for better user experience in African market',
+      result: '+280% user retention, +450% app downloads, 65% fewer complaints',
+      testimonial: 'The UI/UX redesign was phenomenal. Adebayo understood our African market needs perfectly.',
+      clientName: 'Kwame Asante',
+      clientRole: 'Founder',
+      image: 'https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg?auto=compress&cs=tinysrgb&w=800',
+      category: 'UI/UX Design',
+      metrics: [
+        { label: 'User Retention', value: '+280%' },
+        { label: 'App Downloads', value: '+450%' },
         { label: 'Timeline', value: '4 months' }
       ]
     }

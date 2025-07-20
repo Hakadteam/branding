@@ -32,53 +32,63 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah Johnson',
-      role: 'Marketing Director',
-      company: 'TechFlow Solutions',
-      content: 'Working with Adebayo and HAKAD Digital Lab was a game-changer for our business. The sales funnel they created increased our conversion rate by 280% and generated over $500K in additional revenue within just 3 months. Their attention to detail and strategic approach is unmatched.',
+      name: 'Chioma Okafor',
+      role: 'CEO',
+      company: 'Lagos Fashion House',
+      content: 'HAKAD Digital Lab transformed our online presence completely. As a Nigerian fashion brand, we struggled with international visibility. Adebayo created a sales funnel that increased our international orders by 320% and our Instagram following grew from 5K to 45K in 4 months. The GMB optimization brought us local customers we never reached before.',
       avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150',
       rating: 5,
-      results: '+280% Conversion Rate'
+      results: '+320% International Sales'
     },
     {
       id: 2,
-      name: 'Michael Chen',
-      role: 'CEO',
-      company: 'DataSync Pro',
-      content: 'The UI/UX redesign of our dashboard was absolutely phenomenal. User satisfaction increased to 4.9/5 and our support tickets decreased by 50%. Adebayo truly understands how to create user-centered designs that drive business results.',
+      name: 'Kwame Asante',
+      role: 'Founder',
+      company: 'Accra Tech Solutions',
+      content: 'Working with HAKAD Digital Lab from Ghana was seamless. The UI/UX redesign of our fintech app increased user retention by 280% and reduced customer complaints by 65%. Adebayo understood our African market needs and created designs that resonated with our users. Our app downloads increased by 450% after the redesign.',
       avatar: 'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=150',
       rating: 5,
-      results: '4.9/5 User Satisfaction'
+      results: '+280% User Retention'
     },
     {
       id: 3,
-      name: 'Emily Rodriguez',
-      role: 'Restaurant Owner',
-      company: 'Bella Vista Restaurants',
-      content: 'Our GMB optimization with HAKAD Digital Lab transformed our local presence. We saw a 220% increase in local visibility and our customer calls increased by 150%. The ROI has been incredible and our restaurants are busier than ever.',
+      name: 'Amara Okonkwo',
+      role: 'Managing Director',
+      company: 'Abuja Real Estate Group',
+      content: 'The Google Business optimization and social media strategy HAKAD Digital Lab implemented for our real estate company was exceptional. Our local search visibility increased by 340%, property inquiries grew by 250%, and we closed 60% more deals. Adebayo truly understands the Nigerian market and what drives results here.',
       avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150',
       rating: 5,
-      results: '+220% Local Visibility'
+      results: '+340% Local Visibility'
     },
     {
       id: 4,
-      name: 'David Thompson',
-      role: 'Founder',
-      company: 'FitLife Coaching',
-      content: 'The social media strategy developed by Adebayo exceeded all our expectations. Our engagement rate increased by 350% and we gained 180% more followers. Most importantly, our lead generation increased by 200%. Highly recommend HAKAD Digital Lab!',
+      name: 'Sarah Mitchell',
+      role: 'Marketing Director',
+      company: 'Cape Town Digital Agency',
+      content: 'As a fellow agency in South Africa, we partnered with HAKAD Digital Lab for our own rebranding. The results were outstanding - our client acquisition increased by 290%, our website conversions improved by 180%, and our social media engagement grew by 400%. Adebayo delivers world-class work that competes globally.',
       avatar: 'https://images.pexels.com/photos/834863/pexels-photo-834863.jpeg?auto=compress&cs=tinysrgb&w=150',
       rating: 5,
-      results: '+350% Engagement Rate'
+      results: '+290% Client Acquisition'
     },
     {
       id: 5,
-      name: 'Lisa Wang',
-      role: 'Business Development Manager',
-      company: 'Consulting Plus',
-      content: 'The B2B lead generation funnel created by HAKAD Digital Lab revolutionized our sales process. Lead quality improved by 190% and our conversion rate increased by 160%. Our sales cycle is now 40% shorter. Outstanding work!',
+      name: 'Olumide Adebayo',
+      role: 'CEO',
+      company: 'Port Harcourt Oil Services',
+      content: 'HAKAD Digital Lab helped us transition from traditional marketing to digital. The sales funnel and LinkedIn strategy they created generated over ₦50M in new contracts within 6 months. Our B2B lead quality improved by 380%, and we now have clients across West Africa. Exceptional ROI and professional service.',
       avatar: 'https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=150',
       rating: 5,
-      results: '+190% Lead Quality'
+      results: '₦50M+ New Contracts'
+    },
+    {
+      id: 6,
+      name: 'Fatima Al-Hassan',
+      role: 'Founder',
+      company: 'Kano E-commerce Hub',
+      content: 'Working with HAKAD Digital Lab was transformative for our e-commerce platform. They created a complete digital strategy that increased our online sales by 420% and expanded our reach to 12 African countries. The social media campaigns brought us over 100K new customers. Truly exceptional work that understands the African market.',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150',
+      rating: 5,
+      results: '+420% Online Sales'
     }
   ];
 

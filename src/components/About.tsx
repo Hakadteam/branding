@@ -70,9 +70,12 @@ const About = () => {
             </h2>
             
             <div className="relative mb-8">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-600 to-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-                <span className="text-4xl font-bold text-white">AH</span>
-              </div>
+              <img
+                src="/6026178131397823641.jpg"
+                alt="Adebayo Hammed - Founder of HAKAD Digital Lab"
+                className="w-32 h-32 rounded-2xl object-cover mb-6 shadow-lg border-4 border-white"
+                loading="lazy"
+              />
               <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                 <CheckCircle className="h-5 w-5 text-white" />
               </div>
