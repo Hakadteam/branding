@@ -188,17 +188,13 @@ const About = () => {
                 <span>Get in Touch</span>
               </Link>
 
-              <div className="p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Mission</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Helping brands grow with design, strategy, and funnel-driven thinking. My goal is to transform businesses through innovative digital solutions that deliver measurable results and sustainable growth.
-                </p>
-              </div>
-                className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
-              >
-                Get in Touch
-              </Link>
+            <div className="p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl">
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Mission</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Helping brands grow with design, strategy, and funnel-driven thinking. My goal is to transform businesses through innovative digital solutions that deliver measurable results and sustainable growth.
+              </p>
             </div>
+          </div>
 
             {/* Right Content - Values */}
             <div className={`transition-all duration-1000 delay-300 ${isInView ? 'animate-slide-in-right' : 'opacity-0'}`}>
