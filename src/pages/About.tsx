@@ -181,12 +181,12 @@ const About = () => {
                 <span className="text-gray-600">Based in Lagos, Nigeria</span>
               </div>
 
-              <Link
-                to="/contact"
-                className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl space-x-2 mb-8"
-              >
-                <span>Get in Touch</span>
-              </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl space-x-2 mb-8"
+            >
+              <span>Get in Touch</span>
+            </Link>
 
             <div className="p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Mission</h3>
