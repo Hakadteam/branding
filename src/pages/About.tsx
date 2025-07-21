@@ -136,7 +136,7 @@ const About = () => {
             {/* Left Content - Founder Bio */}
             <div className={`transition-all duration-1000 ${isInView ? 'animate-slide-in-left' : 'opacity-0'}`}>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Meet Adebayo Hammed
+                About Adebayo Hammed
               </h2>
               
               <div className="relative mb-8">
@@ -153,7 +153,7 @@ const About = () => {
               
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 <strong>Adebayo Hammed</strong>, Founder and Lead Digital Strategist at HAKAD Digital Lab, 
-                brings over 5 years of proven experience in digital marketing and business growth. His passion 
+                is a professional website designer and UI/UX specialist with a background in Zoology from Unilorin. Over the years, he's worked with clients across industries, delivering high-converting digital experiences. His passion 
                 for helping businesses succeed online has driven the success of 150+ projects across Nigeria and beyond.
               </p>
               
@@ -163,6 +163,19 @@ const About = () => {
                 an average of <strong>250%</strong> within 6 months.
               </p>
 
+              {/* Tools Used */}
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Tools I Use:</h3>
+                <div className="flex flex-wrap gap-3">
+                  {['Figma', 'Webflow', 'Notion', 'Zapier', 'Meta Business Suite'].map((tool, index) => (
+                    <span key={index} className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mission */}
               <div className="flex items-center space-x-4 mb-8">
                 <MapPin className="h-5 w-5 text-blue-600" />
                 <span className="text-gray-600">Based in Lagos, Nigeria</span>
@@ -170,6 +183,17 @@ const About = () => {
 
               <Link
                 to="/contact"
+                className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl space-x-2 mb-8"
+              >
+                <span>Get in Touch</span>
+              </Link>
+
+              <div className="p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Mission</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Helping brands grow with design, strategy, and funnel-driven thinking. My goal is to transform businesses through innovative digital solutions that deliver measurable results and sustainable growth.
+                </p>
+              </div>
                 className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
               >
                 Get in Touch

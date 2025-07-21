@@ -117,11 +117,11 @@ const Services = () => {
               <span>Our Services</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
-              How We Help You <span className="text-blue-600">Grow</span>
+              Explore the Range of Services <span className="text-blue-600">I Offer</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              We provide complete digital solutions that increase your visibility, automate your processes, 
-              and improve customer experience to drive real business growth.
+              Transform your digital experience with comprehensive solutions designed to increase your visibility, 
+              automate your processes, and improve customer experience.
             </p>
           </div>
         </div>
@@ -188,7 +188,7 @@ const Services = () => {
                       to={service.link}
                       className={`w-full bg-gradient-to-r ${service.gradient} text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2 hover:scale-105 shadow-lg hover:shadow-xl`}
                     >
-                      <span>Learn More</span>
+                      <span>Read More</span>
                       <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
