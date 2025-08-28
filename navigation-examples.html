@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Navigation Bar Examples</title>
+    <link rel="stylesheet" href="navigation-styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Centered Navigation Bar Solutions</h1>
+        
+        <!-- Method 1: Flexbox Approach -->
+        <section class="example-section">
+            <h2>Method 1: Flexbox (Recommended)</h2>
+            <nav class="navbar navbar-flexbox" role="navigation" aria-label="Main navigation - Flexbox">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </section>
+
+        <!-- Method 2: CSS Grid Approach -->
+        <section class="example-section">
+            <h2>Method 2: CSS Grid</h2>
+            <nav class="navbar navbar-grid" role="navigation" aria-label="Main navigation - Grid">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </section>
+
+        <!-- Method 3: Text-align with Inline-block -->
+        <section class="example-section">
+            <h2>Method 3: Text-align with Inline-block</h2>
+            <nav class="navbar navbar-text-align" role="navigation" aria-label="Main navigation - Text align">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </section>
+
+        <!-- Method 4: Mobile-First Responsive Navigation -->
+        <section class="example-section">
+            <h2>Method 4: Mobile-First Responsive (with Hamburger Menu)</h2>
+            <nav class="navbar navbar-responsive" role="navigation" aria-label="Main navigation - Responsive">
+                <div class="nav-brand">
+                    <a href="#" class="brand-link">Brand</a>
+                </div>
+                <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </section>
+
+        <!-- Implementation Notes -->
+        <section class="notes-section">
+            <h2>Implementation Notes</h2>
+            <div class="notes">
+                <h3>Browser Compatibility:</h3>
+                <ul>
+                    <li><strong>Flexbox:</strong> Supported in all modern browsers (IE 11+)</li>
+                    <li><strong>CSS Grid:</strong> Supported in all modern browsers (IE 11+ with -ms- prefix)</li>
+                    <li><strong>Text-align:</strong> Universal support across all browsers</li>
+                </ul>
+
+                <h3>Accessibility Features:</h3>
+                <ul>
+                    <li>Semantic <code>&lt;nav&gt;</code> element with proper role</li>
+                    <li>ARIA labels for screen readers</li>
+                    <li>Keyboard navigation support</li>
+                    <li>Focus indicators for better usability</li>
+                    <li>Mobile hamburger menu with proper ARIA attributes</li>
+                </ul>
+
+                <h3>Responsive Design:</h3>
+                <ul>
+                    <li>Mobile-first approach with progressive enhancement</li>
+                    <li>Flexible layouts that adapt to different screen sizes</li>
+                    <li>Touch-friendly navigation for mobile devices</li>
+                    <li>Collapsible menu for smaller screens</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script src="navigation-script.js"></script>
+</body>
+</html>
