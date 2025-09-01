@@ -13,7 +13,8 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const { isModalOpen, buttonType, openScheduling, closeScheduling } = useScheduling();
@@ -42,8 +43,9 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
-    if (submitError) {
-      setSubmitError(null);
+    if (subscriptionStatus === 'error') {
+      setSubscriptionStatus('idle');
+      setErrorMessage('');
     }
   };
 
@@ -62,6 +64,10 @@ const Contact = () => {
         throw new Error('Please enter a valid email address');
       }
 
+      if (!emailRegex.test(formData.email.trim())) {
+        throw new Error('Please enter a valid email address');
+      }
+
       await contactService.create({
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
@@ -77,6 +83,7 @@ const Contact = () => {
     } catch (error) {
       console.error('Error submitting contact form:', error);
       setSubmitError(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+      setSubscriptionStatus('error');
     } finally {
       setIsSubmitting(false);
     }
@@ -171,12 +178,12 @@ Best regards`);
                 </div>
               )}
 
-              {submitError && (
+              {subscriptionStatus === 'error' && errorMessage && (
                 <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center space-x-3">
                   <AlertCircle className="h-5 w-5 text-red-600" />
                   <div>
                     <p className="text-red-800 font-medium">Error sending message</p>
-                    <p className="text-red-600 text-sm">{submitError}</p>
+                    <p className="text-red-600 text-sm">{errorMessage}</p>
                   </div>
                 </div>
               )}

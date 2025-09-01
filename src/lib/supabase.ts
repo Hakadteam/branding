@@ -5,8 +5,9 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://zspdsmchyrkadg
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseAnonKey) {
-  console.error('❌ VITE_SUPABASE_ANON_KEY is missing. Please add your Supabase anonymous key to your .env file.');
-  console.log('📝 Get your key from: https://supabase.com/dashboard/project/zspdsmchyrkadgdjiuyb/settings/api');
+  console.warn('⚠️ VITE_SUPABASE_ANON_KEY is missing. Some features may not work properly.');
+  console.log('📝 To enable full functionality, add your Supabase anonymous key to your .env file.');
+  console.log('🔗 Get your key from: https://supabase.com/dashboard/project/zspdsmchyrkadgdjiuyb/settings/api');
 }
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey || '', {
@@ -29,23 +30,20 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey || '
 export const testConnection = async () => {
   try {
     if (!supabaseAnonKey) {
-      console.error('❌ Cannot test connection: Supabase anonymous key is missing');
+      console.warn('⚠️ Skipping connection test: Supabase anonymous key is missing');
       return false;
     }
     
-    // Simple connection test that doesn't require specific tables
-    const { data, error } = await supabase.auth.getSession();
+    // Test connection with a simple query
+    const { error } = await supabase.from('projects').select('count').limit(1);
     if (error) {
-      console.warn('⚠️ Supabase connection warning:', error.message);
-      // Don't treat auth session errors as connection failures
-      console.log('✅ Supabase connection established (auth session check)');
+      console.warn('⚠️ Supabase connection test failed:', error.message);
       return false;
     }
     console.log('✅ Supabase connected successfully');
     return true;
   } catch (err) {
-    console.warn('⚠️ Supabase connection test skipped:', err instanceof Error ? err.message : 'Unknown error');
-    // Don't fail the app if Supabase is temporarily unavailable
+    console.warn('⚠️ Supabase connection test failed:', err instanceof Error ? err.message : 'Unknown error');
     return false;
   }
 };

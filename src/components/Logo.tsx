@@ -19,6 +19,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
         src="/logo.png"
         alt="Hakad Digital Lab"
         className={`${sizeClasses[size]} transition-all duration-300 hover:scale-105 filter drop-shadow-sm`}
+        loading="lazy"
         onError={(e) => {
           // Fallback if image fails to load
           const target = e.target as HTMLImageElement;

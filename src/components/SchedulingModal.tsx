@@ -20,22 +20,34 @@ const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose, butt
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
+      script.onerror = () => {
+        console.error('Failed to load Calendly script');
+        setIsLoading(false);
+      };
       script.onload = () => {
         setCalendlyLoaded(true);
         setIsLoading(false);
         
         // Initialize Calendly widget
         if (window.Calendly) {
-          window.Calendly.initInlineWidget({
-            url: calendlyUrl,
-            parentElement: document.getElementById('calendly-inline-widget'),
-            prefill: {},
-            utm: {
-              utmCampaign: 'HAKAD Digital Lab Website',
-              utmSource: buttonType === 'consultation' ? 'consultation-button' : 'schedule-button',
-              utmMedium: 'website'
-            }
-          });
+          try {
+            window.Calendly.initInlineWidget({
+              url: calendlyUrl,
+              parentElement: document.getElementById('calendly-inline-widget'),
+              prefill: {},
+              utm: {
+                utmCampaign: 'HAKAD Digital Lab Website',
+                utmSource: buttonType === 'consultation' ? 'consultation-button' : 'schedule-button',
+                utmMedium: 'website'
+              }
+            });
+          } catch (error) {
+            console.error('Error initializing Calendly widget:', error);
+            setIsLoading(false);
+          }
+        } else {
+          console.error('Calendly object not available');
+          setIsLoading(false);
         }
       };
       document.head.appendChild(script);
@@ -118,6 +130,21 @@ const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose, butt
               <div className="text-center">
                 <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                 <p className="text-gray-600">Loading calendar...</p>
+              </div>
+            </div>
+          )}
+          {!isLoading && !calendlyLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+              <div className="text-center">
+                <p className="text-gray-600 mb-4">Unable to load calendar widget</p>
+                <a
+                  href={calendlyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Open Calendar in New Tab
+                </a>
               </div>
             </div>
           )}

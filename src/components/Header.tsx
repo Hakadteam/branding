@@ -81,6 +81,8 @@ const Header = () => {
                       className={`flex items-center space-x-1 font-medium transition-all duration-300 hover:scale-105 group ${
                         isActivePath(item.path) ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
                       }`}
+                      aria-expanded={isServicesOpen}
+                      aria-haspopup="true"
                     >
                       <span>{item.name}</span>
                       <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${
@@ -100,6 +102,7 @@ const Header = () => {
                             className={`block px-4 py-3 text-sm transition-colors hover:bg-blue-50 hover:text-blue-600 ${
                               location.pathname === subItem.path ? 'text-blue-600 bg-blue-50' : 'text-gray-700'
                             }`}
+                            role="menuitem"
                           >
                             {subItem.name}
                           </Link>
@@ -129,6 +132,8 @@ const Header = () => {
           <button
             className="md:hidden p-2 rounded-lg transition-all duration-300 hover:bg-white/10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
           >
             <div className="relative w-6 h-6">
               <Menu className={`absolute inset-0 h-6 w-6 transition-all duration-300 ${
@@ -142,9 +147,9 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden overflow-hidden transition-all duration-500 ${
+        <nav className={`md:hidden overflow-hidden transition-all duration-500 ${
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
+        }`} aria-label="Mobile navigation menu">
           <div className="bg-white/95 backdrop-blur-md border-t border-gray-200 py-4 rounded-b-2xl">
             {navItems.map((item) => (
               <div key={item.name}>
@@ -155,6 +160,7 @@ const Header = () => {
                       ? 'text-blue-600 bg-gradient-to-r from-blue-50 to-green-50' 
                       : 'text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-green-50'
                   }`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
@@ -169,6 +175,7 @@ const Header = () => {
                             ? 'text-blue-600 bg-blue-50'
                             : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
                         }`}
+                        onClick={() => setIsMenuOpen(false)}
                       >
                         {subItem.name}
                       </Link>
@@ -178,7 +185,7 @@ const Header = () => {
               </div>
             ))}
           </div>
-        </div>
+        </nav>
       </div>
     </header>
   );
