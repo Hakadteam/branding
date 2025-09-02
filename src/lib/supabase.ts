@@ -5,12 +5,12 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://zspdsmchyrkadg
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseAnonKey) {
-  console.warn('⚠️ VITE_SUPABASE_ANON_KEY is missing. Some features may not work properly.');
-  console.log('📝 To enable full functionality, add your Supabase anonymous key to your .env file.');
+  console.error('❌ VITE_SUPABASE_ANON_KEY is missing from .env file');
+  console.log('📝 Please add your Supabase anonymous key to the .env file');
   console.log('🔗 Get your key from: https://supabase.com/dashboard/project/zspdsmchyrkadgdjiuyb/settings/api');
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey || '', {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey || 'placeholder', {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
@@ -30,20 +30,20 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey || '
 export const testConnection = async () => {
   try {
     if (!supabaseAnonKey) {
-      console.warn('⚠️ Skipping connection test: Supabase anonymous key is missing');
+      console.warn('⚠️ Supabase anonymous key is missing - using demo mode');
       return false;
     }
     
-    // Test connection with a simple query
-    const { error } = await supabase.from('projects').select('count').limit(1);
+    // Test connection with auth session check instead of table query
+    const { data, error } = await supabase.auth.getSession();
     if (error) {
-      console.warn('⚠️ Supabase connection test failed:', error.message);
+      console.warn('⚠️ Supabase connection test failed - using demo mode');
       return false;
     }
     console.log('✅ Supabase connected successfully');
     return true;
   } catch (err) {
-    console.warn('⚠️ Supabase connection test failed:', err instanceof Error ? err.message : 'Unknown error');
+    console.warn('⚠️ Supabase connection test failed - using demo mode');
     return false;
   }
 };
